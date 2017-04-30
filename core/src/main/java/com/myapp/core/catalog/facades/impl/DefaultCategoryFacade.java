@@ -1,0 +1,57 @@
+package com.myapp.core.catalog.facades.impl;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.broadleafcommerce.core.catalog.domain.Category;
+import org.springframework.util.CollectionUtils;
+
+import com.myapp.core.beans.CategoryData;
+import com.myapp.core.catalog.facades.CategoryFacade;
+import com.myapp.core.catalog.service.MyCategoryService;
+import com.myapp.core.converter.Converter;
+
+public class DefaultCategoryFacade implements CategoryFacade
+{
+	private Converter<Category, CategoryData> categoryConverter;
+	
+	private MyCategoryService categoryService;
+	
+	
+	public Converter<Category, CategoryData> getCategoryConverter() {
+		return categoryConverter;
+	}
+
+
+	public void setCategoryConverter(Converter<Category, CategoryData> categoryConverter) {
+		this.categoryConverter = categoryConverter;
+	}
+
+
+	public MyCategoryService getCategoryService() {
+		return categoryService;
+	}
+
+
+	public void setCategoryService(MyCategoryService categoryService) {
+		this.categoryService = categoryService;
+	}
+
+
+	@Override
+	public List<CategoryData> readCategoriesFromStore(Long storeId) 
+	{
+		List<Category> categories= categoryService.readCategoriesFromStore(storeId);
+		List<CategoryData> categoryList= new ArrayList<CategoryData>();
+		if(!CollectionUtils.isEmpty(categories))
+		{
+			for(Category category: categories)
+			{
+				CategoryData categoryData=categoryConverter.convert(category);
+				categoryList.add(categoryData);
+			}
+		}
+		return categoryList;
+	}
+	
+}
