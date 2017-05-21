@@ -78,6 +78,15 @@
 		</property>
 	</bean>
 	
+	<bean id="customerConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="com.myapp.core.beans.CustomerData"/>
+		<property name="populators">
+			<list>
+				<ref bean="customerPopulator"/>
+			</list>
+		</property>
+	</bean>
+	
 	<bean id="productPopulator" class="com.myapp.core.product.populator.ProductPopulator"/>
 	<bean id="addressPopulator" class="com.myapp.core.populators.AddressPopulator"/>
 	
@@ -95,9 +104,16 @@
 		<property name="categoryService" ref="myCategoryService"/>
 	</bean>
 	
+	<bean id="customerFacade" class="com.myapp.core.catalog.facades.impl.DefaultCustomerFacade">
+		<property name="customerConverter" ref="customerConverter"/>
+		<property name="myCustomerService" ref="myCustomerService"/>
+	</bean>
+	
 	<bean id="storePopulator" class="com.myapp.core.populators.StorePopulator">
 	</bean>
 	<bean id="categoryPopulator" class="com.myapp.core.populators.CategoryPopulator">
+	</bean>
+	<bean id="customerPopulator" class="com.myapp.core.populators.CustomerPopulator">
 	</bean>
 	
 	<bean id="myCategoryService" class="com.myapp.core.catalog.service.impl.DefaultCategoryService">
@@ -106,8 +122,14 @@
 	<bean id="myProductService" class="com.myapp.core.catalog.service.impl.DefaultProductService">
 		<property name="productDao" ref="myProductDao"/>
 	</bean>
+	<bean id="myCustomerService" class="com.myapp.core.catalog.service.impl.DefaultCustomerService">
+		<property name="customerDao" ref="myCustomerDao"/>
+	</bean>
 	
 	<bean id="myProductDao" class="com.myapp.core.catalog.dao.impl.DefaultProductDao">
+	</bean>
+	
+	<bean id="myCustomerDao" class="com.myapp.core.catalog.dao.impl.DefaultCustomerDao">
 	</bean>
 	
 	<!-- <bean id="blCustomerService" class="org.broadleafcommerce.profile.core.service.CustomerServiceImpl"></bean>

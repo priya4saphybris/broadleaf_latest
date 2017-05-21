@@ -16,10 +16,12 @@
 
 package com.mycompany.controller.catalog;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.broadleafcommerce.core.web.controller.catalog.BroadleafRatingsController;
 import org.broadleafcommerce.core.web.controller.catalog.ReviewForm;
+import org.broadleafcommerce.profile.core.service.CustomerService;
 import org.broadleafcommerce.profile.web.core.CustomerState;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -32,8 +34,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.myapp.core.beans.MyRatingType;
 
 @Controller
-public class RatingsController extends BroadleafRatingsController {
-
+public class RatingsController extends BroadleafRatingsController 
+{
+	@Resource(name = "blCustomerService")
+	protected CustomerService customerService;
+	
     @RequestMapping(value = "/reviews/product/{itemId}", method = RequestMethod.GET)
     public String viewReviewForm(HttpServletRequest request, Model model, @PathVariable("itemId") String itemId, @ModelAttribute("reviewForm") ReviewForm form) {
         return super.viewReviewForm(request, model, form, itemId);
@@ -48,11 +53,18 @@ public class RatingsController extends BroadleafRatingsController {
     @ResponseBody
     public String reviewStore(HttpServletRequest request, Model model, @PathVariable("itemId") String itemId, @ModelAttribute("reviewForm") ReviewForm form)
     {
-    	super.reviewItem(request, model, form, itemId);
+    	reviewStore(request, model, form, itemId);
 		return itemId;
     }
     
-    public void reviewStore(HttpServletRequest request, Model model, ReviewForm form, String itemId) {
+    @RequestMapping(value = "/reviews/store/{itemId}", method = RequestMethod.GET)
+    public void getReviewsByStore(HttpServletRequest request, Model model, @PathVariable("itemId") String itemId)
+    {
+    	
+    }
+    
+    public void reviewStore(HttpServletRequest request, Model model, ReviewForm form, String itemId) 
+    {
 		this.ratingService.reviewItem(itemId, MyRatingType.STORE, CustomerState.getCustomer(), form.getRating(),
 				form.getReviewText());
 	}

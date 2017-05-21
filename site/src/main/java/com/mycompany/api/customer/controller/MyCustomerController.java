@@ -1,6 +1,7 @@
 package com.mycompany.api.customer.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -21,12 +22,13 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
+import com.myapp.core.beans.CustomerData;
 import com.myapp.core.beans.RestMessageData;
+import com.myapp.core.catalog.facades.CustomerFacade;
 import com.myapp.core.forms.MyCustomerForm;
 
 @Controller
@@ -37,6 +39,9 @@ public class MyCustomerController
 	
 	@Resource(name = "blCustomerService")
 	protected CustomerService customerService;
+	
+	@Resource(name = "customerFacade")
+	private CustomerFacade customerFacade;
 	
 	@Resource(name = "blLoginService")
 	protected LoginService loginService;
@@ -72,6 +77,13 @@ public class MyCustomerController
 		}
 		
 		return rmd;
+	}
+	
+	@RequestMapping(value="/list", method= RequestMethod.GET)
+	@ResponseBody
+	public List<CustomerData> getCustomers()
+	{
+		return customerFacade.readAllCustomers();
 	}
 	
 	private void register(MyCustomerForm myCustomerForm, RestMessageData rmd) throws PricingException
