@@ -90,6 +90,7 @@
                 <value>/sample-giftcard/**</value>
                 <value>/hosted/sample-checkout/**</value>
                 <value>/customer/**</value>
+                <value>/store/**</value>
             </list>
         </property>
     </bean>

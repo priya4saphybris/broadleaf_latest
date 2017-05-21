@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.myapp.core.beans.StoreData;
@@ -36,7 +37,7 @@ public class AdminStoreController
 		return storeFacade.readStoreByStoreId(storeId);
 	}
 	
-	@RequestMapping("/create")
+	@RequestMapping(value="/create", method= RequestMethod.POST)
 	@ResponseBody
 	public boolean createStore(StoreForm storeForm, HttpServletRequest request, HttpServletResponse response)
 	{

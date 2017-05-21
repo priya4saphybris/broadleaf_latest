@@ -47,21 +47,17 @@ public class MyCustomerController
 	@Resource(name = "blUserDetailsService")
 	private UserDetailsService userDetailsService;
 	
-	@RequestMapping(value="/create", method= RequestMethod.POST, produces="application/json")
+	@RequestMapping(value="/create", method= RequestMethod.POST)
 	@ResponseBody
 	public RestMessageData createCustomer(HttpServletRequest request, HttpServletResponse response,
-			@RequestParam("firstName") String firstName, 
-			@RequestParam("lastName") String lastName, 
-			@RequestParam("emailAddress") String emailAddress,
-			@RequestParam("password") String password,
-			@RequestParam("passwordConfirm") String passwordConfirm) throws PricingException, JsonParseException, JsonMappingException, IOException
+			MyCustomerForm customerForm) throws PricingException, JsonParseException, JsonMappingException, IOException
 	{
 		MyCustomerForm myCustomerForm= new MyCustomerForm();
-		myCustomerForm.setFirstName(firstName);
-		myCustomerForm.setLastName(lastName);
-		myCustomerForm.setEmailAddress(emailAddress);
-		myCustomerForm.setPassword(password);
-		myCustomerForm.setPasswordConfirm(passwordConfirm);
+		myCustomerForm.setFirstName(customerForm.getFirstName());
+		myCustomerForm.setLastName(customerForm.getLastName());
+		myCustomerForm.setEmailAddress(customerForm.getEmailAddress());
+		myCustomerForm.setPassword(customerForm.getPassword());
+		myCustomerForm.setPasswordConfirm(customerForm.getPasswordConfirm());
 		
 		LOG.info("Registering customer");
 		RestMessageData rmd= new RestMessageData();

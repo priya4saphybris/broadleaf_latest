@@ -1,5 +1,6 @@
 package com.myapp.core.catalog.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.broadleafcommerce.core.catalog.domain.Product;

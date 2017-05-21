@@ -8,3 +8,6 @@ public interface MyProductService
 {
 	List<Product> readAllProductsFromStore(Long storeId);
 }
+
+
+		

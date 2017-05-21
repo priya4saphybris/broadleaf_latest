@@ -14,6 +14,7 @@ public class StorePopulator implements Populator<Store, StoreData>
 	public void populate(Store source, StoreData target) throws ConvertionException 
 	{
 		target.setId(String.valueOf(source.getId()));
+		target.setName(source.getName());
 		target.setLatitude(String.valueOf(source.getLatitude()));
 		target.setLongitude(String.valueOf(source.getLongitude()));
 		target.setStoreHours(source.getStoreHours());
