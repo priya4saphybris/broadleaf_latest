@@ -91,6 +91,7 @@
                 <value>/hosted/sample-checkout/**</value>
                 <value>/customer/**</value>
                 <value>/store/**</value>
+                <value>/reviews/store/**</value>
             </list>
         </property>
     </bean>
