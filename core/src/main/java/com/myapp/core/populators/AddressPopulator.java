@@ -8,6 +8,7 @@ import com.myapp.core.populator.Populator;
 
 public class AddressPopulator implements Populator<Address, AddressData> 
 {
+	@SuppressWarnings("deprecation")
 	@Override
 	public void populate(Address source, AddressData target) throws ConvertionException 
 	{

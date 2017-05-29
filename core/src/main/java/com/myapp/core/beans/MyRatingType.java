@@ -7,9 +7,7 @@ import org.broadleafcommerce.core.rating.service.type.RatingType;
 
 public class MyRatingType extends RatingType
 {
-	private static final long serialVersionUID = 1L;
-	
-	private static final Map<String, RatingType> TYPES = new HashMap();
+	private static final Map<String, RatingType> TYPES = new HashMap<String, RatingType>();
 
 	public static final MyRatingType PRODUCT = new MyRatingType("PRODUCT");
 	
@@ -38,6 +36,7 @@ public class MyRatingType extends RatingType
 			TYPES.put(type, this);
 	}
 
+	@SuppressWarnings("unused")
 	public int hashCode() {
 		int prime = 31;
 		int result = 1;

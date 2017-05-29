@@ -1,6 +1,5 @@
 package com.myapp.core.forms;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class MyCustomerForm 
 {

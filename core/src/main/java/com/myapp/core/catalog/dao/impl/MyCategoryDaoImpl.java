@@ -16,6 +16,7 @@ public class MyCategoryDaoImpl implements MyCategoryDao
 	@PersistenceContext(unitName = "blPU")
 	protected EntityManager em;
 	
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	public List<Category> readStoreCategoriesByName(String categoryName, int limit, int offset) 
 	{

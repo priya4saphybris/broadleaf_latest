@@ -10,6 +10,7 @@ import com.myapp.core.populator.Populator;
 public class StorePopulator implements Populator<Store, StoreData> 
 {
 
+	@SuppressWarnings("unused")
 	@Override
 	public void populate(Store source, StoreData target) throws ConvertionException 
 	{
