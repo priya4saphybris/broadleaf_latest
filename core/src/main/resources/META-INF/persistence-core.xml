@@ -11,6 +11,14 @@
         <class>com.myapp.core.catalog.model.MyStoreImpl</class>
         <class>com.myapp.core.catalog.model.StoreCategoryXrefImpl</class>
         <class>com.myapp.core.catalog.model.MyProductImpl</class>
+        <class>com.myapp.core.user.User</class>
+        <class>com.myapp.core.user.Faculty</class>
+        <class>com.myapp.core.user.Parent</class>
+        <class>com.myapp.core.user.Student</class>
+        <class>com.myapp.core.user.Employee</class>
+        <class>com.myapp.core.education.organization.Institute</class>
+        <class>com.myapp.core.education.organization.University</class>
+        <class>com.myapp.core.education.standard.Standard</class>
         <exclude-unlisted-classes/>
     </persistence-unit>
     
