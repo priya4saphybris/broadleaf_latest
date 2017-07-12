@@ -145,8 +145,4 @@
 	
 	<bean id="myCustomerDao" class="com.myapp.core.catalog.dao.impl.DefaultCustomerDao">
 	</bean>
-	
-	
-	<!-- <bean id="blCustomerService" class="org.broadleafcommerce.profile.core.service.CustomerServiceImpl"></bean>
-	<bean id="" class="org.broadleafcommerce.profile.web.core.service.login.LoginServiceImpl"></bean> -->
 </beans>
