@@ -9,6 +9,7 @@ import com.myapp.core.populator.Populator;
 public class RegionPopulator implements Populator<State, RegionData>
 {
 	
+	
 	@Override
 	public void populate(State source, RegionData target) throws ConvertionException 
 	{

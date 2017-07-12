@@ -44,7 +44,6 @@ public class DefaultRegionFacade implements RegionFacade
 		return regionConverter.convert(state);
 	}
 
-	
 	@Override
 	public List<RegionData> getAllRegions() 
 	{

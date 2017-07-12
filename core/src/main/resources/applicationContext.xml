@@ -100,6 +100,7 @@
 	<bean id="addressPopulator" class="com.myapp.core.populators.AddressPopulator"/>
 	<bean id="regionPopulator" class="com.myapp.core.populators.RegionPopulator"/>
 	
+	
 	<bean id="productFacade" class="com.myapp.core.catalog.facades.impl.DefaultProductFacade">
 		<property name="productConverter" ref="productConverter"/>
 		<property name="productService" ref="myProductService"/>
@@ -122,6 +123,7 @@
 	<bean id="regionFacade" class="com.myapp.core.catalog.facades.impl.DefaultRegionFacade">
 		<property name="regionConverter" ref="regionConverter"/>
 	</bean>
+	
 	
 	<bean id="storePopulator" class="com.myapp.core.populators.StorePopulator">
 	</bean>
