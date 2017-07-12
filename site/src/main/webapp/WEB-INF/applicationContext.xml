@@ -137,6 +137,8 @@
     <bean id="blCatalogSolrConfiguration" class="org.broadleafcommerce.core.search.service.solr.SolrConfiguration">
         <constructor-arg name="solrServer" ref="${solr.source.primary}" />
     </bean>
+    
+    
     <bean id="blSearchService" class="org.broadleafcommerce.core.search.service.solr.SolrSearchServiceImpl"/>
 
     <!-- When the Private Demo starts up with DDL set to create or create-drop, we need to make sure that we -->
@@ -255,9 +257,60 @@
     <bean id="blJsResources" parent="siteJsResourceRequestHandlerBase" />
 
     <bean id="blCssResources" parent="siteCssResourceRequestHandlerBase" />
-    
+    <bean id="blVariableExpressionEvaluator" class="org.broadleafcommerce.common.util.NullFactoryBean" />
+<bean id="blDialect" class="org.broadleafcommerce.common.util.NullFactoryBean" />
+<bean id="blVariableExpressions" class="org.broadleafcommerce.common.util.NullFactoryBean" />
+
+<bean id="blWebTemplateResolvers" class="org.broadleafcommerce.common.util.NullFactoryBean" />
+<bean id="blWebCustomTemplateResolver" class="org.broadleafcommerce.common.util.NullFactoryBean" />
+<bean id="blWebTemplateResolver" class="org.broadleafcommerce.common.util.NullFactoryBean" />
+<bean id="blWebClasspathTemplateResolver" class="org.broadleafcommerce.common.util.NullFactoryBean" />
+<bean id="blWebCommonClasspathTemplateResolver" class="org.broadleafcommerce.common.util.NullFactoryBean" />
+<bean id="blWebTemplateEngine" class="org.broadleafcommerce.common.util.NullFactoryBean" />
+
+<bean id="blEmailTemplateResolvers" class="org.broadleafcommerce.common.util.NullFactoryBean" />
+<bean id="blEmailTemplateResolver" class="org.broadleafcommerce.common.util.NullFactoryBean" />
+<bean id="blEmailCustomTemplateResolver" class="org.broadleafcommerce.common.util.NullFactoryBean" />
+<bean id="blEmailClasspathTemplateResolver" class="org.broadleafcommerce.common.util.NullFactoryBean" />
+<bean id="blEmailTemplateEngine" class="org.broadleafcommerce.common.util.NullFactoryBean" />
+
+<bean id="thymeleafSpringStandardDialect" class="org.broadleafcommerce.common.util.NullFactoryBean" />
+<bean id="blMessageResolver" class="org.broadleafcommerce.common.util.NullFactoryBean" />
+
+<bean id="blContentProcessor" class="org.broadleafcommerce.common.util.NullFactoryBean" />
+<bean id="blDataDrivenEnumerationProcessor" class="org.broadleafcommerce.common.util.NullFactoryBean" />
+<bean id="blResourceBundleProcessor" class="org.broadleafcommerce.common.util.NullFactoryBean" />
+
+<bean id="blAddSortLinkProcessor" class="org.broadleafcommerce.common.util.NullFactoryBean" />
+<bean id="blCategoriesProcessor" class="org.broadleafcommerce.common.util.NullFactoryBean" />
+<bean id="blFormProcessor" class="org.broadleafcommerce.common.util.NullFactoryBean" />
+<bean id="blGoogleAnalyticsProcessor" class="org.broadleafcommerce.common.util.NullFactoryBean" />
+<bean id="blHeadProcessor" class="org.broadleafcommerce.common.util.NullFactoryBean" />
+<bean id="blNamedOrderProcessor" class="org.broadleafcommerce.common.util.NullFactoryBean" />
+<bean id="blProductOptionDisplayProcessor" class="org.broadleafcommerce.common.util.NullFactoryBean" />
+<bean id="blProductOptionValueProcessor" class="org.broadleafcommerce.common.util.NullFactoryBean" />
+<bean id="blProductOptionsProcessor" class="org.broadleafcommerce.common.util.NullFactoryBean" />
+<bean id="blPaginationPageLinkProcessor" class="org.broadleafcommerce.common.util.NullFactoryBean" />
+<bean id="blPaginationSizeLinkProcessor" class="org.broadleafcommerce.common.util.NullFactoryBean" />
+<bean id="blPaginationSortLinkProcessor" class="org.broadleafcommerce.common.util.NullFactoryBean" />
+<bean id="blPriceTextDisplayProcessor" class="org.broadleafcommerce.common.util.NullFactoryBean" />
+<bean id="blRatingsProcessor" class="org.broadleafcommerce.common.util.NullFactoryBean" />
+<bean id="blRelatedProductProcessor" class="org.broadleafcommerce.common.util.NullFactoryBean" />
+<bean id="blRemoveFacetValuesLinkProcessor" class="org.broadleafcommerce.common.util.NullFactoryBean" />
+<bean id="blToggleFacetLinkProcessor" class="org.broadleafcommerce.common.util.NullFactoryBean" />
+<bean id="blUrlRewriteProcessor" class="org.broadleafcommerce.common.util.NullFactoryBean" />
+
+<bean id="blHeadProcessorExtensionManager" class="org.broadleafcommerce.common.util.NullFactoryBean" />
+<bean id="blContentProcessorExtensionManager" class="org.broadleafcommerce.common.util.NullFactoryBean" />
+
+
+
+
     <bean id="blCustomerService" class="org.broadleafcommerce.profile.core.service.CustomerServiceImpl"></bean>
 	<bean id="blLoginService" class="org.broadleafcommerce.profile.web.core.service.login.LoginServiceImpl"></bean>
 	<bean id="blOrderService" class="org.broadleafcommerce.core.order.service.OrderServiceImpl"></bean>
 	<bean id="blUserDetailsService" class="org.broadleafcommerce.profile.core.service.UserDetailsServiceImpl"></bean>
+	<bean id="storeSolrConfiguration" class="com.myapp.core.solr.store.StoreSolrConfiguration">
+		<constructor-arg name="solrServer" ref="${solr.source.primary}" />
+	</bean>
 </beans>
