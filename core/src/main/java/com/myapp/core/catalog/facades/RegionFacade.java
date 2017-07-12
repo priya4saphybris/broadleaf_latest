@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.myapp.core.beans.RegionData;
 
-
 public interface RegionFacade 
 {
 	RegionData getRegionByCode(String code);
