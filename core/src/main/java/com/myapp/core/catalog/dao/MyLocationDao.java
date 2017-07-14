@@ -7,6 +7,8 @@ import org.broadleafcommerce.profile.core.domain.State;
 
 public interface MyLocationDao 
 {
+	
 	List<State> getRegionsStartWith(String query);
 	List<CountrySubdivision> getCitiesStartWith(String query);
+	
 }
