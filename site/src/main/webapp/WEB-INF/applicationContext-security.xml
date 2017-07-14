@@ -92,6 +92,7 @@
                 <value>/customer/**</value>
                 <value>/store/**</value>
                 <value>/reviews/store/**</value>
+                <value>/location/**</value>
             </list>
         </property>
     </bean>

@@ -310,7 +310,7 @@
 	<bean id="blLoginService" class="org.broadleafcommerce.profile.web.core.service.login.LoginServiceImpl"></bean>
 	<bean id="blOrderService" class="org.broadleafcommerce.core.order.service.OrderServiceImpl"></bean>
 	<bean id="blUserDetailsService" class="org.broadleafcommerce.profile.core.service.UserDetailsServiceImpl"></bean>
-	<bean id="storeSolrConfiguration" class="com.myapp.core.solr.store.StoreSolrConfiguration">
+	<!-- <bean id="storeSolrConfiguration" class="com.myapp.core.solr.store.StoreSolrConfiguration">
 		<constructor-arg name="solrServer" ref="${solr.source.primary}" />
-	</bean>
+	</bean> -->
 </beans>

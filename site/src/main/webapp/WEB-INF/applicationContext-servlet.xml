@@ -19,12 +19,8 @@
     <context:component-scan base-package="org.broadleafcommerce.common.web"/>
     <context:component-scan base-package="org.broadleafcommerce.profile.web.controller"/>
     <context:component-scan base-package="org.broadleafcommerce.profile.web.core.service.login"/>
-	<context:component-scan base-package="com.myadmin.api.controllers"/>
-	<context:component-scan base-package="com.myadmin.api.admin.controllers"/>
-	<context:component-scan base-package="com.mycompany.api.customer.controller"/>
     <!-- Scan DemoSite Sample Payment Gateway Implementation -->
-    <context:component-scan base-package="com.mycompany.sample" />
-	<context:component-scan base-package="com.mycompany.api" />
+   
     <!-- Turn on AOP annotations (required by Broadleaf) -->
     <aop:config/>
     
@@ -49,7 +45,11 @@
 
     <!-- Scan for custom controllers -->
     <context:component-scan base-package="com.mycompany.controller" />
-    
+    <context:component-scan base-package="com.mycompany.sample" />
+	<context:component-scan base-package="com.mycompany.api" />
+	<context:component-scan base-package="com.myadmin.api.controllers"/>
+	<context:component-scan base-package="com.myadmin.api.admin.controllers"/>
+	<context:component-scan base-package="com.mycompany.api.customer.controller"/>
     <!-- Allow annotation driven controllers -->
     <mvc:annotation-driven/>
 
@@ -94,5 +94,4 @@
     <bean id="blShippingInfoFormValidator" class="org.broadleafcommerce.core.web.checkout.validator.USShippingInfoFormValidator" />
     
     <import resource="classpath*:applicationContext.xml"/>
-    <bean id="blShippingInfoFormValidator" class="org.broadleafcommerce.core.web.checkout.validator.USShippingInfoFormValidator" />
 </beans>
