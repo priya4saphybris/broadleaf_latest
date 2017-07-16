@@ -34,4 +34,5 @@
         <bean id="com.myapp.core.education.organization.Institute" class="com.myapp.core.education.organization.Institute" scope="prototye"/>
         <bean id="com.myapp.core.education.organization.University" class="com.myapp.core.education.organization.University" scope="prototye"/>
         <bean id="com.myapp.core.education.standard.Standard" class="com.myapp.core.education.standard.Standard" scope="prototye"/>
+        <bean id="com.myapp.core.catalog.model.Area" class="com.myapp.core.catalog.model.AreaImpl"/>
 </beans>

@@ -19,6 +19,7 @@
         <class>com.myapp.core.education.organization.Institute</class>
         <class>com.myapp.core.education.organization.University</class>
         <class>com.myapp.core.education.standard.Standard</class>
+        <class>com.myapp.core.catalog.model.AreaImpl</class>
         <exclude-unlisted-classes/>
     </persistence-unit>
     

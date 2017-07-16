@@ -6,6 +6,7 @@ import org.broadleafcommerce.profile.core.domain.CountrySubdivision;
 import org.broadleafcommerce.profile.core.domain.State;
 
 import com.myapp.core.catalog.dao.MyLocationDao;
+import com.myapp.core.catalog.model.Area;
 import com.myapp.core.catalog.service.MyLocationService;
 
 public class DefaultLocationService implements MyLocationService
@@ -31,6 +32,12 @@ public class DefaultLocationService implements MyLocationService
 	public List<CountrySubdivision> getCitiesStartWith(String query) 
 	{
 		return myLocationDao.getCitiesStartWith(query);
+	}
+
+	@Override
+	public List<Area> getAllAreas() 
+	{
+		return myLocationDao.getAllAreas();
 	}
 
 }

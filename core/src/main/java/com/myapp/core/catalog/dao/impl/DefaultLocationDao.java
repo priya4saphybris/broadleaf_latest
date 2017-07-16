@@ -6,15 +6,14 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
-import org.broadleafcommerce.core.store.domain.StoreImpl;
 import org.broadleafcommerce.profile.core.domain.CountrySubdivision;
 import org.broadleafcommerce.profile.core.domain.CountrySubdivisionImpl;
-import org.broadleafcommerce.profile.core.domain.CustomerImpl;
 import org.broadleafcommerce.profile.core.domain.State;
 import org.broadleafcommerce.profile.core.domain.StateImpl;
 
 import com.myapp.core.catalog.dao.MyLocationDao;
-import com.myapp.core.catalog.model.MyProduct;
+import com.myapp.core.catalog.model.Area;
+import com.myapp.core.catalog.model.AreaImpl;
 
 public class DefaultLocationDao implements MyLocationDao
 {
@@ -49,4 +48,12 @@ public class DefaultLocationDao implements MyLocationDao
 		return typedquery.getResultList();
 	}
 	
+	@SuppressWarnings("unchecked")
+	public List<Area> getAllAreas()
+	{
+		TypedQuery typedquery = this.em.createQuery("FROM "+com.myapp.core.catalog.model.AreaImpl.class.getName(), AreaImpl.class);
+		typedquery.setHint("org.hibernate.cacheable", Boolean.valueOf(true));
+		typedquery.setHint("org.hibernate.cacheRegion", "blStandardElements");
+		return typedquery.getResultList();
+	}
 }

@@ -9,9 +9,11 @@ import org.broadleafcommerce.profile.core.domain.CountrySubdivision;
 import org.broadleafcommerce.profile.core.domain.State;
 import org.broadleafcommerce.profile.core.service.StateService;
 
+import com.myapp.core.beans.AreaData;
 import com.myapp.core.beans.CityData;
 import com.myapp.core.beans.RegionData;
 import com.myapp.core.catalog.facades.LocationFacade;
+import com.myapp.core.catalog.model.Area;
 import com.myapp.core.catalog.service.MyLocationService;
 import com.myapp.core.converter.Converter;
 
@@ -27,6 +29,15 @@ public class DefaultLocationFacade implements LocationFacade
 	
 	private Converter<CountrySubdivision, CityData> citiConverter;
 	
+	private Converter<Area, AreaData> areaConverter;
+	
+	public Converter<Area, AreaData> getAreaConverter() {
+		return areaConverter;
+	}
+
+	public void setAreaConverter(Converter<Area, AreaData> areaConverter) {
+		this.areaConverter = areaConverter;
+	}
 
 	public StateService getStateService() {
 		return stateService;
@@ -103,4 +114,15 @@ public class DefaultLocationFacade implements LocationFacade
 		return cityList;
 	}
 	
+	public List<AreaData> getAllAreas()
+	{
+		List<Area> areas=myLocationService.getAllAreas();
+		List<AreaData> areaDataList= new ArrayList<AreaData>();
+		
+		for(Area area: areas)
+		{
+			areaDataList.add(areaConverter.convert(area));
+		}
+		return areaDataList;
+	}
 }
