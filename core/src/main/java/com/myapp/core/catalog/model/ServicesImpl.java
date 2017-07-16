@@ -25,7 +25,7 @@ public class ServicesImpl
 			@org.hibernate.annotations.Parameter(name = "segment_value", value = "ServicesImpl"),
 			@org.hibernate.annotations.Parameter(name = "entity_name", value = "com.myapp.core.catalog.model.ServicesImpl") })
 	@Column(name = "SERVICES_ID", nullable = false)
-	private int id;
+	private Long id;
 	
 	@OneToOne(targetEntity= AreaImpl.class)
 	@JoinColumn(name="AREA_ID")
@@ -35,11 +35,11 @@ public class ServicesImpl
 	@JoinColumn(name="CATEGORY_ID")
 	private List<Category> availableCategories;
 
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

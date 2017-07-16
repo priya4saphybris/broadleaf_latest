@@ -114,7 +114,6 @@
 		</property>
 	</bean>
 	
-	<bean id="areaPopulator" class=""/>
 	<bean id="productPopulator" class="com.myapp.core.product.populator.ProductPopulator"/>
 	<bean id="addressPopulator" class="com.myapp.core.populators.AddressPopulator"/>
 	<bean id="regionPopulator" class="com.myapp.core.populators.RegionPopulator"/>
@@ -143,6 +142,7 @@
 		<property name="regionConverter" ref="regionConverter"/>
 		<property name="myLocationService" ref="myLocationService"/>
 		<property name="citiConverter" ref="cityConverter"/>
+		<property name="areaConverter" ref="areaConverter"/>
 	</bean>
 	
 	
