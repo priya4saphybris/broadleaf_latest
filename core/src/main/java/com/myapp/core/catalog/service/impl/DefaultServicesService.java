@@ -5,7 +5,6 @@ import java.util.List;
 import org.broadleafcommerce.core.catalog.domain.Category;
 
 import com.myapp.core.catalog.dao.MyServicesDao;
-import com.myapp.core.catalog.model.Area;
 import com.myapp.core.catalog.model.Services;
 import com.myapp.core.catalog.service.MyServicesService;
 

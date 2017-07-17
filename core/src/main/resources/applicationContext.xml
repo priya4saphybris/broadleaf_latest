@@ -171,4 +171,14 @@
 	<bean id="myLocationService" class="com.myapp.core.catalog.service.impl.DefaultLocationService">
 		<property name="myLocationDao" ref="myLocationDao"/>
 	</bean>
+	
+	<bean id="myServicesService" class="com.myapp.core.catalog.service.impl.DefaultServicesService">
+		<property name="myServicesDao" ref="myServicesDao"/>
+	</bean>
+	
+	<bean id="myServicesDao" class="com.myapp.core.catalog.dao.impl.DefaultServicesDao"/>
+	
+	<bean id="myServicesFacade" class="com.myapp.core.catalog.facades.impl.DefaultServicesFacade">
+		<property name="myServicesService" ref="myServicesService"/>
+	</bean>
 </beans>
