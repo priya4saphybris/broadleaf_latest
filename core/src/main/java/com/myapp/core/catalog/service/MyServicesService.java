@@ -1,9 +1,12 @@
 package com.myapp.core.catalog.service;
 
 
-import com.myapp.core.catalog.model.Services;
+import java.util.List;
+
+import org.broadleafcommerce.core.catalog.domain.Category;
+
 
 public interface MyServicesService 
 {
-	Services getServicesForCity(String areaCode);
+	List<Category> getServicesForCity(String areaCode);
 }

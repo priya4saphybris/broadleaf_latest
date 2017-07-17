@@ -9,6 +9,7 @@ import org.springframework.util.CollectionUtils;
 import com.myapp.core.beans.CategoryData;
 import com.myapp.core.catalog.facades.CategoryFacade;
 import com.myapp.core.catalog.service.MyCategoryService;
+import com.myapp.core.catalog.service.MyServicesService;
 import com.myapp.core.converter.Converter;
 
 public class DefaultCategoryFacade implements CategoryFacade
@@ -17,7 +18,19 @@ public class DefaultCategoryFacade implements CategoryFacade
 	
 	private MyCategoryService categoryService;
 	
+	private MyServicesService myServicesService;
 	
+	
+	public MyServicesService getMyServicesService() {
+		return myServicesService;
+	}
+
+
+	public void setMyServicesService(MyServicesService myServicesService) {
+		this.myServicesService = myServicesService;
+	}
+
+
 	public Converter<Category, CategoryData> getCategoryConverter() {
 		return categoryConverter;
 	}
@@ -51,6 +64,26 @@ public class DefaultCategoryFacade implements CategoryFacade
 				categoryList.add(categoryData);
 			}
 		}
+		return categoryList;
+	}
+
+
+	@Override
+	public List<CategoryData> getCategoriesFromArea(String areaCode) 
+	{
+		List<Category> categories=myServicesService.getServicesForCity(areaCode);
+		
+		List<CategoryData> categoryList= new ArrayList<CategoryData>();
+		
+		if(!CollectionUtils.isEmpty(categories))
+		{
+			for(Category category: categories)
+			{
+				CategoryData categoryData=categoryConverter.convert(category);
+				categoryList.add(categoryData);
+			}
+		}
+		
 		return categoryList;
 	}
 	
