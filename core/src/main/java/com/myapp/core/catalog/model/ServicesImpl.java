@@ -13,6 +13,9 @@ import javax.persistence.Table;
 
 import org.broadleafcommerce.core.catalog.domain.Category;
 import org.broadleafcommerce.core.catalog.domain.CategoryImpl;
+import org.hibernate.annotations.BatchSize;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
@@ -31,8 +34,11 @@ public class ServicesImpl
 	@JoinColumn(name="AREA_ID")
 	private Area area;
 	
-	@OneToMany(targetEntity= CategoryImpl.class)
-	@JoinColumn(name="CATEGORY_ID")
+	@OneToMany(targetEntity = CategoryImpl.class, mappedBy = "services", orphanRemoval = true, cascade = {
+			javax.persistence.CascadeType.MERGE, javax.persistence.CascadeType.PERSIST,
+			javax.persistence.CascadeType.REFRESH })
+	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "blCategories")
+	@BatchSize(size = 50)
 	private List<Category> availableCategories;
 
 	public Long getId() {

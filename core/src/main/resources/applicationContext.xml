@@ -131,6 +131,7 @@
 	<bean id="categoryFacade" class="com.myapp.core.catalog.facades.impl.DefaultCategoryFacade">
 		<property name="categoryConverter" ref="categoryConverter"/>
 		<property name="categoryService" ref="myCategoryService"/>
+		<property name="myServicesService" ref="myServicesService"/>
 	</bean>
 	
 	<bean id="customerFacade" class="com.myapp.core.catalog.facades.impl.DefaultCustomerFacade">
