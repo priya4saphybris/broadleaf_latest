@@ -7,6 +7,7 @@
     <persistence-unit name="blPU" transaction-type="RESOURCE_LOCAL">
         <non-jta-data-source>jdbc/web</non-jta-data-source>
         <mapping-file>config/jpa/domain/MyProduct.orm.xml</mapping-file>
+        <class>com.myapp.core.catalog.model.ServicesCategoryXrefImpl</class>
         <class>com.myapp.core.catalog.model.MyCategoryImpl</class>
         <class>com.myapp.core.catalog.model.MyStoreImpl</class>
         <class>com.myapp.core.catalog.model.StoreCategoryXrefImpl</class>
@@ -20,6 +21,7 @@
         <class>com.myapp.core.education.organization.University</class>
         <class>com.myapp.core.education.standard.Standard</class>
         <class>com.myapp.core.catalog.model.AreaImpl</class>
+        <class>com.myapp.core.catalog.model.ServicesImpl</class>
         <exclude-unlisted-classes/>
     </persistence-unit>
     

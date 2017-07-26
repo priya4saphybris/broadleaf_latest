@@ -36,4 +36,5 @@
         <bean id="com.myapp.core.education.standard.Standard" class="com.myapp.core.education.standard.Standard" scope="prototye"/>
         <bean id="com.myapp.core.catalog.model.Area" class="com.myapp.core.catalog.model.AreaImpl"/>
         <bean id="com.myapp.core.catalog.model.Services" class="com.myapp.core.catalog.model.ServicesImpl"/>
+        <bean id="com.myapp.core.catalog.model.ServicesCategoryXref" class="com.myapp.core.catalog.model.ServicesCategoryXrefImpl"/>
 </beans>

@@ -34,12 +34,11 @@ public class ServicesImpl
 	@JoinColumn(name="AREA_ID")
 	private Area area;
 	
-	@OneToMany(targetEntity = CategoryImpl.class, mappedBy = "services", orphanRemoval = true, cascade = {
-			javax.persistence.CascadeType.MERGE, javax.persistence.CascadeType.PERSIST,
+	@OneToMany(targetEntity = ServicesCategoryXrefImpl.class, mappedBy = "service", orphanRemoval = true, cascade = {
+			javax.persistence.CascadeType.PERSIST, javax.persistence.CascadeType.MERGE,
 			javax.persistence.CascadeType.REFRESH })
-	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "blCategories")
-	@BatchSize(size = 50)
-	private List<Category> availableCategories;
+	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "blStandardElements")
+	private List<ServicesCategoryXref> availableCategories;
 
 	public Long getId() {
 		return id;
@@ -57,11 +56,11 @@ public class ServicesImpl
 		this.area = area;
 	}
 
-	public List<Category> getAvailableCategories() {
+	public List<ServicesCategoryXref> getAvailableCategories() {
 		return availableCategories;
 	}
 
-	public void setAvailableCategories(List<Category> availableCategories) {
+	public void setAvailableCategories(List<ServicesCategoryXref> availableCategories) {
 		this.availableCategories = availableCategories;
 	}
 	
