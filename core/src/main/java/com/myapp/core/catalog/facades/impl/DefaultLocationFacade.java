@@ -125,4 +125,19 @@ public class DefaultLocationFacade implements LocationFacade
 		}
 		return areaDataList;
 	}
+
+	@Override
+	public List<AreaData> getAllAreasForCity(String cityCode) 
+	{
+		List<Area> areas=myLocationService.getAllAreasForCity(cityCode);
+		List<AreaData> areaDataList= new ArrayList<AreaData>();
+		
+		for(Area area: areas)
+		{
+			areaDataList.add(areaConverter.convert(area));
+		}
+		return areaDataList;
+	}
+	
+	
 }

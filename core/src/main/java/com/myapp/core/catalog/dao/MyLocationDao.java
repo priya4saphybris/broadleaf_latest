@@ -13,4 +13,5 @@ public interface MyLocationDao
 	List<State> getRegionsStartWith(String query);
 	List<CountrySubdivision> getCitiesStartWith(String query);
 	List<Area> getAllAreas();
+	List<Area> getAllAreasForCity(String cityCode);
 }

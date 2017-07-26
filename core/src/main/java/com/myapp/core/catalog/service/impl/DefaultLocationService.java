@@ -5,6 +5,7 @@ import java.util.List;
 import org.broadleafcommerce.profile.core.domain.CountrySubdivision;
 import org.broadleafcommerce.profile.core.domain.State;
 
+import com.myapp.core.beans.AreaData;
 import com.myapp.core.catalog.dao.MyLocationDao;
 import com.myapp.core.catalog.model.Area;
 import com.myapp.core.catalog.service.MyLocationService;
@@ -38,6 +39,12 @@ public class DefaultLocationService implements MyLocationService
 	public List<Area> getAllAreas() 
 	{
 		return myLocationDao.getAllAreas();
+	}
+
+	@Override
+	public List<Area> getAllAreasForCity(String cityCode) 
+	{
+		return myLocationDao.getAllAreasForCity(cityCode);
 	}
 
 }
