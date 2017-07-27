@@ -43,7 +43,15 @@ public class DefaultLocationDao implements MyLocationDao
 		typedquery.setHint("org.hibernate.cacheable", Boolean.valueOf(true));
 		typedquery.setHint("org.hibernate.cacheRegion", "blStandardElements");
 		
-		typedquery.setParameter("name",query.toUpperCase()+"%");
+		if(query != null)
+		{
+			typedquery.setParameter("name",query.toUpperCase()+"%");
+		}
+		else
+		{
+			typedquery.setParameter("name","%");
+		}
+		
 		typedquery.setHint("org.hibernate.cacheable", Boolean.valueOf(true));
 		return typedquery.getResultList();
 	}
@@ -61,7 +69,7 @@ public class DefaultLocationDao implements MyLocationDao
 	@Override
 	public List<Area> getAllAreasForCity(String cityCode) 
 	{
-		TypedQuery typedquery = this.em.createQuery("FROM "+com.myapp.core.catalog.model.AreaImpl.class.getName()+"WHERE cityCode=:cityCode", AreaImpl.class);
+		TypedQuery typedquery = this.em.createQuery("FROM "+com.myapp.core.catalog.model.AreaImpl.class.getName()+" WHERE cityCode.abbreviation =:cityCode", AreaImpl.class);
 		typedquery.setParameter("cityCode", cityCode);
 		typedquery.setHint("org.hibernate.cacheable", Boolean.valueOf(true));
 		typedquery.setHint("org.hibernate.cacheRegion", "blStandardElements");

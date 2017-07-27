@@ -7,10 +7,12 @@ import javax.annotation.Resource;
 
 import org.broadleafcommerce.profile.core.domain.CountrySubdivision;
 import org.broadleafcommerce.profile.core.domain.State;
+import org.broadleafcommerce.profile.core.service.CountrySubdivisionService;
 import org.broadleafcommerce.profile.core.service.StateService;
 
 import com.myapp.core.beans.AreaData;
 import com.myapp.core.beans.CityData;
+import com.myapp.core.beans.LocationData;
 import com.myapp.core.beans.RegionData;
 import com.myapp.core.catalog.facades.LocationFacade;
 import com.myapp.core.catalog.model.Area;
@@ -27,10 +29,22 @@ public class DefaultLocationFacade implements LocationFacade
 	
 	private Converter<State, RegionData> regionConverter;
 	
-	private Converter<CountrySubdivision, CityData> citiConverter;
+	private Converter<CountrySubdivision, LocationData> citiConverter;
 	
 	private Converter<Area, AreaData> areaConverter;
 	
+	@Resource(name="blCountrySubdivisionService")
+	private CountrySubdivisionService cityService;
+	
+	
+	public CountrySubdivisionService getCityService() {
+		return cityService;
+	}
+
+	public void setCityService(CountrySubdivisionService cityService) {
+		this.cityService = cityService;
+	}
+
 	public Converter<Area, AreaData> getAreaConverter() {
 		return areaConverter;
 	}
@@ -63,11 +77,11 @@ public class DefaultLocationFacade implements LocationFacade
 		this.regionConverter = regionConverter;
 	}
 
-	public Converter<CountrySubdivision, CityData> getCitiConverter() {
+	public Converter<CountrySubdivision, LocationData> getCitiConverter() {
 		return citiConverter;
 	}
 
-	public void setCitiConverter(Converter<CountrySubdivision, CityData> citiConverter) {
+	public void setCitiConverter(Converter<CountrySubdivision, LocationData> citiConverter) {
 		this.citiConverter = citiConverter;
 	}
 
@@ -103,13 +117,13 @@ public class DefaultLocationFacade implements LocationFacade
 	}
 
 	@Override
-	public List<CityData> getCitiesStartWith(String query) 
+	public List<LocationData> getCitiesStartWith(String query) 
 	{
 		List<CountrySubdivision> cities=myLocationService.getCitiesStartWith(query);
-		List<CityData> cityList= new ArrayList<CityData>();
+		List<LocationData> cityList= new ArrayList<LocationData>();
 		for(CountrySubdivision city: cities)
 		{
-			cityList.add(citiConverter.convert(city));
+			cityList.add(getAllAreasForCity(city.getAbbreviation()));
 		}
 		return cityList;
 	}
@@ -127,8 +141,10 @@ public class DefaultLocationFacade implements LocationFacade
 	}
 
 	@Override
-	public List<AreaData> getAllAreasForCity(String cityCode) 
+	public LocationData getAllAreasForCity(String cityCode) 
 	{
+		CountrySubdivision city=cityService.findSubdivisionByAbbreviation(cityCode);
+		LocationData locationData= citiConverter.convert(city);
 		List<Area> areas=myLocationService.getAllAreasForCity(cityCode);
 		List<AreaData> areaDataList= new ArrayList<AreaData>();
 		
@@ -136,8 +152,8 @@ public class DefaultLocationFacade implements LocationFacade
 		{
 			areaDataList.add(areaConverter.convert(area));
 		}
-		return areaDataList;
+		locationData.setAreas(areaDataList);
+		return locationData;
 	}
-	
 	
 }

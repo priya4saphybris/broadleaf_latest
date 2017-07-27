@@ -2,19 +2,19 @@ package com.myapp.core.populators;
 
 import org.broadleafcommerce.profile.core.domain.CountrySubdivision;
 
-import com.myapp.core.beans.CityData;
+import com.myapp.core.beans.LocationData;
 import com.myapp.core.convertion.exception.ConvertionException;
 import com.myapp.core.populator.Populator;
 
-public class CityPopulator implements Populator<CountrySubdivision, CityData>
+public class CityPopulator implements Populator<CountrySubdivision, LocationData>
 {
 	
 	@Override
-	public void populate(CountrySubdivision source, CityData target) throws ConvertionException 
+	public void populate(CountrySubdivision source, LocationData target) throws ConvertionException 
 	{
-		target.setCode(source.getAbbreviation());
+		target.setCityCode(source.getAbbreviation());
 		target.setStateCode(source.getAlternateAbbreviation());
-		target.setName(source.getName());
+		target.setCityName(source.getName());
 	}
 	
 }
