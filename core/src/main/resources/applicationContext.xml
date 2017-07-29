@@ -114,6 +114,15 @@
 		</property>
 	</bean>
 	
+	<bean id="paymentModeConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="com.myapp.core.beans.PaymentModeData"/>
+		<property name="populators">
+			<list>
+				<ref bean="paymentModePopulator"/>
+			</list>
+		</property>
+	</bean>
+	
 	<bean id="productPopulator" class="com.myapp.core.product.populator.ProductPopulator"/>
 	<bean id="addressPopulator" class="com.myapp.core.populators.AddressPopulator"/>
 	<bean id="regionPopulator" class="com.myapp.core.populators.RegionPopulator"/>
@@ -151,6 +160,8 @@
 	<bean id="categoryPopulator" class="com.myapp.core.populators.CategoryPopulator"/>
 	<bean id="customerPopulator" class="com.myapp.core.populators.CustomerPopulator"/>
 	<bean id="areaPopulator" class="com.myapp.core.populators.AreaPopulator"/>
+	<bean id="paymentModePopulator" class="com.myapp.core.populators.PaymentModePopulator"/>
+	
 	<bean id="myCategoryService" class="com.myapp.core.catalog.service.impl.DefaultCategoryService">
 	</bean>
 	

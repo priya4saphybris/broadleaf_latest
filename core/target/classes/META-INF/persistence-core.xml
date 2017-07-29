@@ -22,6 +22,7 @@
         <class>com.myapp.core.education.standard.Standard</class>
         <class>com.myapp.core.catalog.model.AreaImpl</class>
         <class>com.myapp.core.catalog.model.ServicesImpl</class>
+        <class>com.myapp.core.catalog.model.PaymentModeImpl</class>
         <exclude-unlisted-classes/>
     </persistence-unit>
     
