@@ -36,4 +36,10 @@ public class MyCategoryImpl extends CategoryImpl implements MyCategory
 		this.allStoreCategoryXrefs=allStoreCategoryXrefs;
 	}
 	
+	@Override
+	public String getName()
+	{
+		return super.name;
+	}
+	
 }

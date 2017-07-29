@@ -15,7 +15,7 @@ public class DefaultServicesDao implements MyServicesDao
 	protected EntityManager em;
 	
 	@Override
-	public List<Services> getServicesForCity(String areaCode) 
+	public List<Services> getServicesForArea(String areaCode) 
 	{
 		TypedQuery query = this.em.createQuery("FROM "+com.myapp.core.catalog.model.ServicesImpl.class.getName()+" WHERE area.areaCode =:areaCode", ServicesImpl.class);
 		query.setParameter("areaCode", areaCode);

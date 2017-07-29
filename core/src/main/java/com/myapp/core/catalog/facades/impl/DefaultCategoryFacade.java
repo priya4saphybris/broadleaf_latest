@@ -8,6 +8,7 @@ import org.springframework.util.CollectionUtils;
 
 import com.myapp.core.beans.CategoryData;
 import com.myapp.core.catalog.facades.CategoryFacade;
+import com.myapp.core.catalog.model.ServicesCategoryXref;
 import com.myapp.core.catalog.service.MyCategoryService;
 import com.myapp.core.catalog.service.MyServicesService;
 import com.myapp.core.converter.Converter;
@@ -71,15 +72,15 @@ public class DefaultCategoryFacade implements CategoryFacade
 	@Override
 	public List<CategoryData> getCategoriesFromArea(String areaCode) 
 	{
-		List<Category> categories=myServicesService.getServicesForCity(areaCode);
+		List<ServicesCategoryXref> categories=myServicesService.getServicesForArea(areaCode);
 		
 		List<CategoryData> categoryList= new ArrayList<CategoryData>();
 		
 		if(!CollectionUtils.isEmpty(categories))
 		{
-			for(Category category: categories)
+			for(ServicesCategoryXref category: categories)
 			{
-				CategoryData categoryData=categoryConverter.convert(category);
+				CategoryData categoryData=categoryConverter.convert(category.getCategory());
 				categoryList.add(categoryData);
 			}
 		}

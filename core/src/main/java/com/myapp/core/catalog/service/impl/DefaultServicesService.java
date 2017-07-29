@@ -2,10 +2,11 @@ package com.myapp.core.catalog.service.impl;
 
 import java.util.List;
 
-import org.broadleafcommerce.core.catalog.domain.Category;
+import org.springframework.util.CollectionUtils;
 
 import com.myapp.core.catalog.dao.MyServicesDao;
 import com.myapp.core.catalog.model.Services;
+import com.myapp.core.catalog.model.ServicesCategoryXref;
 import com.myapp.core.catalog.service.MyServicesService;
 
 public class DefaultServicesService implements MyServicesService
@@ -21,11 +22,12 @@ public class DefaultServicesService implements MyServicesService
 	}
 
 	@Override
-	public List<Category> getServicesForCity(String areaCode) 
+	public List<ServicesCategoryXref> getServicesForArea(String areaCode) 
 	{
-		if(null != myServicesDao.getServicesForCity(areaCode))
+		List<Services> servicesList=myServicesDao.getServicesForArea(areaCode);
+		if(null != servicesList && !CollectionUtils.isEmpty(servicesList))
 		{
-			Services services= myServicesDao.getServicesForCity(areaCode).get(0);
+			Services services= (Services)servicesList.get(0);
 			return services.getAvailableCategories();
 		}
 		return null;

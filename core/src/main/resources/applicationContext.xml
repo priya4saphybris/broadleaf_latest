@@ -181,5 +181,6 @@
 	
 	<bean id="myServicesFacade" class="com.myapp.core.catalog.facades.impl.DefaultServicesFacade">
 		<property name="myServicesService" ref="myServicesService"/>
+		<property name="categoryConverter" ref="categoryConverter"/>
 	</bean>
 </beans>

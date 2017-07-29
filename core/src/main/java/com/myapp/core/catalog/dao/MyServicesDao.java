@@ -6,5 +6,5 @@ import com.myapp.core.catalog.model.Services;
 
 public interface MyServicesDao 
 {
-	List<Services> getServicesForCity(String areaCode);
+	List<Services> getServicesForArea(String areaCode);
 }

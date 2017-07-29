@@ -20,7 +20,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name="SERVICES")
-public class ServicesImpl 
+public class ServicesImpl implements Services
 {
 	@Id
 	@GeneratedValue(generator = "ServicesId")
