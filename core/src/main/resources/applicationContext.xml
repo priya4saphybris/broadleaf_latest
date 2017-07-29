@@ -194,4 +194,15 @@
 		<property name="myServicesService" ref="myServicesService"/>
 		<property name="categoryConverter" ref="categoryConverter"/>
 	</bean>
+	
+	<bean id="paymentModeDao" class="com.myapp.core.catalog.dao.impl.DefaultPaymentModeDao"/>
+	
+	<bean id="paymentModeService" class="com.myapp.core.catalog.service.impl.DefaultPaymentModeService">
+		<property name="paymentModeDao" ref="paymentModeDao"/>
+	</bean>
+	
+	<bean id="paymentModeFacade" class="com.myapp.core.catalog.facades.impl.DefaultPaymentModeFacade">
+		<property name="paymentModeService" ref="paymentModeService"/>
+		<property name="paymentModeConverter" ref="paymentModeConverter"/>
+	</bean>
 </beans>
