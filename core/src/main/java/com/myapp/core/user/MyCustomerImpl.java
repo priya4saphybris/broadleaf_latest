@@ -7,7 +7,7 @@ import javax.persistence.Table;
 
 import org.broadleafcommerce.profile.core.domain.CustomerImpl;
 
-import com.myapp.core.catalog.model.LocationSelection;
+import com.myapp.core.catalog.model.Area;
 import com.myapp.core.catalog.model.LocationSelectionImpl;
 
 @Entity
@@ -17,14 +17,14 @@ public class MyCustomerImpl extends CustomerImpl implements MyCustomer
 	private static final long serialVersionUID = 1L;
 	
 	@OneToOne(targetEntity= LocationSelectionImpl.class, optional = true, cascade = { javax.persistence.CascadeType.REFRESH })
-	@JoinColumn(name="LOCATION_ID")
-	private LocationSelection locationSelection;
+	@JoinColumn(name="AREA_ID")
+	private Area area;
 
-	public LocationSelection getLocationSelection() {
-		return locationSelection;
+	public Area getArea() {
+		return area;
 	}
 
-	public void setLocationSelection(LocationSelection locationSelection) {
-		this.locationSelection = locationSelection;
+	public void setArea(Area area) {
+		this.area = area;
 	}
 }

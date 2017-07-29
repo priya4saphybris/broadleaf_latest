@@ -12,10 +12,12 @@ import org.broadleafcommerce.profile.core.service.StateService;
 
 import com.myapp.core.beans.AreaData;
 import com.myapp.core.beans.CityData;
+import com.myapp.core.beans.CurrentLocationData;
 import com.myapp.core.beans.LocationData;
 import com.myapp.core.beans.RegionData;
 import com.myapp.core.catalog.facades.LocationFacade;
 import com.myapp.core.catalog.model.Area;
+import com.myapp.core.catalog.model.AreaImpl;
 import com.myapp.core.catalog.service.MyLocationService;
 import com.myapp.core.converter.Converter;
 
@@ -155,5 +157,18 @@ public class DefaultLocationFacade implements LocationFacade
 		locationData.setAreas(areaDataList);
 		return locationData;
 	}
-	
+
+	@Override
+	public void selectLocation(CurrentLocationData currentLocation) 
+	{
+		Area area= new AreaImpl();
+		CountrySubdivision countrySubdivision=cityService.findSubdivisionByAbbreviation(currentLocation.getCityCode());
+		area.setCityCode(countrySubdivision);
+		
+		if(currentLocation.getCityCode().equalsIgnoreCase(currentLocation.getAreaCode()))
+		{
+			area.setAreaCode(countrySubdivision.getAbbreviation());
+			area.setAreaName(countrySubdivision.getName());
+		}
+	}
 }

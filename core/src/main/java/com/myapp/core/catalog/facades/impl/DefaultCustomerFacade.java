@@ -4,12 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.broadleafcommerce.profile.core.domain.Customer;
+import org.springframework.jdbc.support.CustomSQLExceptionTranslatorRegistrar;
 import org.springframework.util.CollectionUtils;
 
+import com.myapp.core.beans.CurrentLocationData;
 import com.myapp.core.beans.CustomerData;
 import com.myapp.core.catalog.facades.CustomerFacade;
+import com.myapp.core.catalog.model.Area;
 import com.myapp.core.catalog.service.MyCustomerService;
+import com.myapp.core.catalog.service.MyLocationService;
 import com.myapp.core.converter.Converter;
+import com.myapp.core.user.MyCustomer;
 
 public class DefaultCustomerFacade implements CustomerFacade
 {
@@ -17,7 +22,16 @@ public class DefaultCustomerFacade implements CustomerFacade
 	
 	private Converter<Customer, CustomerData> customerConverter;
 	
+	private MyLocationService locationService;
 	
+	public MyLocationService getLocationService() {
+		return locationService;
+	}
+
+	public void setLocationService(MyLocationService locationService) {
+		this.locationService = locationService;
+	}
+
 	public MyCustomerService getMyCustomerService() {
 		return myCustomerService;
 	}
@@ -55,5 +69,20 @@ public class DefaultCustomerFacade implements CustomerFacade
 		}
 		return customersList;
 		
+	}
+
+	@Override
+	public CustomerData selectLocation(CurrentLocationData currentLocation, Customer customer) 
+	{
+		MyCustomer myCustomer= (MyCustomer)customer;
+		Area area=locationService.findArea(currentLocation.getAreaCode());
+		
+		if(null != area)
+		{
+			myCustomer.setArea(area);
+			MyCustomer updatedCustomer=myCustomerService.save(myCustomer);
+			return customerConverter.convert(customer);
+		}
+		return null;
 	}
 }

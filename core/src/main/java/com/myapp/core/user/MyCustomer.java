@@ -1,9 +1,9 @@
 package com.myapp.core.user;
 
-import com.myapp.core.catalog.model.LocationSelection;
+import com.myapp.core.catalog.model.Area;
 
 public interface MyCustomer 
 {
-	LocationSelection getLocationSelection();
-	void setLocationSelection(LocationSelection locationSelection);
+	Area getArea();
+	void setArea(Area area);
 }

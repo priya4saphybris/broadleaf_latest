@@ -146,6 +146,7 @@
 	<bean id="customerFacade" class="com.myapp.core.catalog.facades.impl.DefaultCustomerFacade">
 		<property name="customerConverter" ref="customerConverter"/>
 		<property name="myCustomerService" ref="myCustomerService"/>
+		<property name="locationService" ref="myLocationService"/>
 	</bean>
 	
 	<bean id="locationFacade" class="com.myapp.core.catalog.facades.impl.DefaultLocationFacade">
@@ -158,7 +159,9 @@
 	
 	<bean id="storePopulator" class="com.myapp.core.populators.StorePopulator"/>
 	<bean id="categoryPopulator" class="com.myapp.core.populators.CategoryPopulator"/>
-	<bean id="customerPopulator" class="com.myapp.core.populators.CustomerPopulator"/>
+	<bean id="customerPopulator" class="com.myapp.core.populators.CustomerPopulator">
+		<property name="areaConverter" ref="areaConverter"/>
+	</bean>
 	<bean id="areaPopulator" class="com.myapp.core.populators.AreaPopulator"/>
 	<bean id="paymentModePopulator" class="com.myapp.core.populators.PaymentModePopulator"/>
 	

@@ -14,4 +14,5 @@ public interface MyLocationService
 	List<CountrySubdivision> getCitiesStartWith(String query);
 	List<Area> getAllAreas();
 	List<Area> getAllAreasForCity(String cityCode);
+	Area findArea(String areaCode);
 }

@@ -12,6 +12,7 @@ import org.broadleafcommerce.profile.core.domain.Customer;
 import org.broadleafcommerce.profile.core.domain.CustomerImpl;
 
 import com.myapp.core.catalog.dao.MyCustomerDao;
+import com.myapp.core.user.MyCustomer;
 
 public class DefaultCustomerDao implements MyCustomerDao
 {
@@ -28,6 +29,12 @@ public class DefaultCustomerDao implements MyCustomerDao
 		query.setHint("org.hibernate.cacheable", Boolean.valueOf(true));
 		query.setHint("org.hibernate.cacheRegion", "query.Catalog");
 		return query.getResultList();
+	}
+
+	@Override
+	public MyCustomer saveCustomer(MyCustomer myCustomer) 
+	{
+		return ((MyCustomer) this.em.merge(myCustomer));
 	}
 	
 }

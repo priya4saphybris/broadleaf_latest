@@ -10,6 +10,7 @@ import org.broadleafcommerce.profile.core.domain.CountrySubdivision;
 import org.broadleafcommerce.profile.core.domain.CountrySubdivisionImpl;
 import org.broadleafcommerce.profile.core.domain.State;
 import org.broadleafcommerce.profile.core.domain.StateImpl;
+import org.springframework.util.CollectionUtils;
 
 import com.myapp.core.catalog.dao.MyLocationDao;
 import com.myapp.core.catalog.model.Area;
@@ -74,5 +75,20 @@ public class DefaultLocationDao implements MyLocationDao
 		typedquery.setHint("org.hibernate.cacheable", Boolean.valueOf(true));
 		typedquery.setHint("org.hibernate.cacheRegion", "blStandardElements");
 		return typedquery.getResultList();
+	}
+
+	@Override
+	public Area findArea(String areaCode) 
+	{
+		TypedQuery typedquery = this.em.createQuery("FROM "+com.myapp.core.catalog.model.AreaImpl.class.getName()+" WHERE areaCode =:areaCode", AreaImpl.class);
+		typedquery.setParameter("areaCode", areaCode);
+		typedquery.setHint("org.hibernate.cacheable", Boolean.valueOf(true));
+		typedquery.setHint("org.hibernate.cacheRegion", "blStandardElements");
+		
+		if(null != typedquery.getResultList() && CollectionUtils.isEmpty(typedquery.getResultList()))
+		{
+			return (Area) typedquery.getResultList().get(0);
+		}
+		return null;
 	}
 }

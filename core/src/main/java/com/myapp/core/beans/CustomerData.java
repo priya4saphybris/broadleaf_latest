@@ -10,6 +10,7 @@ public class CustomerData
 	private String userName;
 	private String firstName;
 	private String lastName;
+	private AreaData areaData;
 	public Long getId() {
 		return id;
 	}
@@ -34,5 +35,10 @@ public class CustomerData
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
-	
+	public AreaData getAreaData() {
+		return areaData;
+	}
+	public void setAreaData(AreaData areaData) {
+		this.areaData = areaData;
+	}
 }
