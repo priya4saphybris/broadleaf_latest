@@ -10,7 +10,7 @@ import com.myapp.core.catalog.dao.PaymentModeDao;
 import com.myapp.core.catalog.model.PaymentMode;
 import com.myapp.core.catalog.model.PaymentModeImpl;
 
-public class DefaultPaymentMode implements PaymentModeDao
+public class DefaultPaymentModeDao implements PaymentModeDao
 {
 	@PersistenceContext(unitName = "blPU")
 	protected EntityManager em;
