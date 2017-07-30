@@ -72,16 +72,15 @@ public class DefaultCustomerFacade implements CustomerFacade
 	}
 
 	@Override
-	public CustomerData selectLocation(CurrentLocationData currentLocation, Customer customer) 
+	public CustomerData selectLocation(CurrentLocationData currentLocation, MyCustomer customer) 
 	{
-		MyCustomer myCustomer= (MyCustomer)customer;
 		Area area=locationService.findArea(currentLocation.getAreaCode());
 		
 		if(null != area)
 		{
-			myCustomer.setArea(area);
-			MyCustomer updatedCustomer=myCustomerService.save(myCustomer);
-			return customerConverter.convert(customer);
+			customer.setArea(area);
+			MyCustomer updatedCustomer=myCustomerService.save(customer);
+			return customerConverter.convert((Customer)updatedCustomer);
 		}
 		return null;
 	}

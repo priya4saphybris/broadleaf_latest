@@ -16,4 +16,5 @@ public interface LocationFacade
 	List<AreaData> getAllAreas();
 	LocationData getAllAreasForCity(String cityCode);
 	void selectLocation(CurrentLocationData currentLocation);
+	AreaData findArea(String areaCode);
 }

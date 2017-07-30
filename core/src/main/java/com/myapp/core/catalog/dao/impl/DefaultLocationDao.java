@@ -85,7 +85,7 @@ public class DefaultLocationDao implements MyLocationDao
 		typedquery.setHint("org.hibernate.cacheable", Boolean.valueOf(true));
 		typedquery.setHint("org.hibernate.cacheRegion", "blStandardElements");
 		
-		if(null != typedquery.getResultList() && CollectionUtils.isEmpty(typedquery.getResultList()))
+		if(null != typedquery.getResultList() && !CollectionUtils.isEmpty(typedquery.getResultList()))
 		{
 			return (Area) typedquery.getResultList().get(0);
 		}

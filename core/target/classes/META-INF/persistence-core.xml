@@ -12,6 +12,7 @@
         <class>com.myapp.core.catalog.model.MyStoreImpl</class>
         <class>com.myapp.core.catalog.model.StoreCategoryXrefImpl</class>
         <class>com.myapp.core.catalog.model.MyProductImpl</class>
+        <class>com.myapp.core.user.MyCustomerImpl</class>
         <class>com.myapp.core.user.User</class>
         <class>com.myapp.core.user.Faculty</class>
         <class>com.myapp.core.user.Parent</class>

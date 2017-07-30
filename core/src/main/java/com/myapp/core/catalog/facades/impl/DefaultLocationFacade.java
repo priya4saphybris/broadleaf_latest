@@ -171,4 +171,15 @@ public class DefaultLocationFacade implements LocationFacade
 			area.setAreaName(countrySubdivision.getName());
 		}
 	}
+
+	@Override
+	public AreaData findArea(String areaCode) 
+	{
+		Area area=myLocationService.findArea(areaCode);
+		if(null != area)
+		{
+			return areaConverter.convert(area);
+		}
+		return null;
+	}
 }
