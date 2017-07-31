@@ -16,6 +16,7 @@ public class AddressData
 	private String zipCode;
 	private String primaryPhone;
 	private String secondaryPhone;
+	private boolean isDefault;
 	
 	public String getId() {
 		return id;
@@ -100,6 +101,12 @@ public class AddressData
 	}
 	public void setSecondaryPhone(String secondaryPhone) {
 		this.secondaryPhone = secondaryPhone;
+	}
+	public boolean isDefault() {
+		return isDefault;
+	}
+	public void setDefault(boolean isDefault) {
+		this.isDefault = isDefault;
 	}
 	
 }

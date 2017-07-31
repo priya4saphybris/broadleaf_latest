@@ -208,4 +208,8 @@
 		<property name="paymentModeService" ref="paymentModeService"/>
 		<property name="paymentModeConverter" ref="paymentModeConverter"/>
 	</bean>
+	
+	<bean id="addressFacade" class="com.myapp.core.catalog.facades.impl.DefaultAddressFacade">
+		<property name="addressConverter" ref="addressConverter"/>
+	</bean>
 </beans>
