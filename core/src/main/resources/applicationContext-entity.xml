@@ -34,8 +34,9 @@
         <bean id="com.myapp.core.education.organization.Institute" class="com.myapp.core.education.organization.Institute" scope="prototye"/>
         <bean id="com.myapp.core.education.organization.University" class="com.myapp.core.education.organization.University" scope="prototye"/>
         <bean id="com.myapp.core.education.standard.Standard" class="com.myapp.core.education.standard.Standard" scope="prototye"/>
-        <bean id="com.myapp.core.catalog.model.Area" class="com.myapp.core.catalog.model.AreaImpl"/>
-        <bean id="com.myapp.core.catalog.model.Services" class="com.myapp.core.catalog.model.ServicesImpl"/>
-        <bean id="com.myapp.core.catalog.model.ServicesCategoryXref" class="com.myapp.core.catalog.model.ServicesCategoryXrefImpl"/>
-        <bean id="com.myapp.core.catalog.model.PaymentMode" class="com.myapp.core.catalog.model.PaymentModeImpl"/>
+        <bean id="com.myapp.core.catalog.model.Area" class="com.myapp.core.catalog.model.AreaImpl" scope="prototye"/>
+        <bean id="com.myapp.core.catalog.model.Services" class="com.myapp.core.catalog.model.ServicesImpl" scope="prototye"/>
+        <bean id="com.myapp.core.catalog.model.ServicesCategoryXref" class="com.myapp.core.catalog.model.ServicesCategoryXrefImpl" scope="prototye"/>
+        <bean id="com.myapp.core.catalog.model.PaymentMode" class="com.myapp.core.catalog.model.PaymentModeImpl" scope="prototye"/>
+        <bean id="com.myapp.core.catalog.model.SmsConfiguration" class="com.myapp.core.catalog.model.SmsConfigurationImpl" scope="prototye"/>
 </beans>
