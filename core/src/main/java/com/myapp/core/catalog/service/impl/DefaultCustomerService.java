@@ -2,7 +2,6 @@ package com.myapp.core.catalog.service.impl;
 
 import java.util.List;
 
-import org.broadleafcommerce.profile.core.domain.Customer;
 
 import com.myapp.core.catalog.dao.MyCustomerDao;
 import com.myapp.core.catalog.service.MyCustomerService;
@@ -23,7 +22,7 @@ public class DefaultCustomerService implements MyCustomerService
 
 
 	@Override
-	public List<Customer> readAllCustomers() 
+	public List<MyCustomer> readAllCustomers() 
 	{
 		return customerDao.readAllCustomers();
 	}
@@ -33,6 +32,13 @@ public class DefaultCustomerService implements MyCustomerService
 	public MyCustomer save(MyCustomer myCustomer) 
 	{
 		return customerDao.saveCustomer(myCustomer);
+	}
+
+
+	@Override
+	public MyCustomer readCustomerById(Long id) 
+	{
+		return customerDao.findCustomerForId(id);
 	}
 
 }

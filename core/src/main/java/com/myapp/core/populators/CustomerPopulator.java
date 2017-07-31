@@ -10,7 +10,7 @@ import com.myapp.core.convertion.exception.ConvertionException;
 import com.myapp.core.populator.Populator;
 import com.myapp.core.user.MyCustomer;
 
-public class CustomerPopulator implements Populator<Customer, CustomerData> 
+public class CustomerPopulator implements Populator<MyCustomer, CustomerData> 
 {
 	private Converter<Area, AreaData> areaConverter;
 	
@@ -23,12 +23,13 @@ public class CustomerPopulator implements Populator<Customer, CustomerData>
 	}
 
 	@Override
-	public void populate(Customer source, CustomerData target) throws ConvertionException 
+	public void populate(MyCustomer source, CustomerData target) throws ConvertionException 
 	{
-		target.setId(source.getId());
-		target.setUserName(source.getUsername());
-		target.setFirstName(source.getFirstName());
-		target.setLastName(source.getLastName());
+		Customer customer= (Customer)source;
+		target.setId(customer.getId());
+		target.setUserName(customer.getUsername());
+		target.setFirstName(customer.getFirstName());
+		target.setLastName(customer.getLastName());
 		
 		if(source instanceof MyCustomer)
 		{

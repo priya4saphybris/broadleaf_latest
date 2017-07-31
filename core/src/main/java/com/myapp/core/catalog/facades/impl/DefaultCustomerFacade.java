@@ -20,7 +20,7 @@ public class DefaultCustomerFacade implements CustomerFacade
 {
 	private MyCustomerService myCustomerService;
 	
-	private Converter<Customer, CustomerData> customerConverter;
+	private Converter<MyCustomer, CustomerData> customerConverter;
 	
 	private MyLocationService locationService;
 	
@@ -40,28 +40,28 @@ public class DefaultCustomerFacade implements CustomerFacade
 		this.myCustomerService = myCustomerService;
 	}
 
-	public Converter<Customer, CustomerData> getCustomerConverter() {
+	public Converter<MyCustomer, CustomerData> getCustomerConverter() {
 		return customerConverter;
 	}
 
-	public void setCustomerConverter(Converter<Customer, CustomerData> customerConverter) {
+	public void setCustomerConverter(Converter<MyCustomer, CustomerData> customerConverter) {
 		this.customerConverter = customerConverter;
 	}
 
 	@Override
 	public List<CustomerData> readAllCustomers() 
 	{
-		List<Customer> customers=myCustomerService.readAllCustomers();
+		List<MyCustomer> customers=myCustomerService.readAllCustomers();
 		return convert(customers);
 	}
 
-	protected List<CustomerData> convert(List<Customer> customers)
+	protected List<CustomerData> convert(List<MyCustomer> customers)
 	{
 		List<CustomerData> customersList= new ArrayList<CustomerData>();
 		
 		if(null != customers && !CollectionUtils.isEmpty(customers))
 		{
-			for(Customer customer: customers)
+			for(MyCustomer customer: customers)
 			{
 				customersList.add(customerConverter.convert(customer));
 			}
@@ -80,7 +80,7 @@ public class DefaultCustomerFacade implements CustomerFacade
 		{
 			customer.setArea(area);
 			MyCustomer updatedCustomer=myCustomerService.save(customer);
-			return customerConverter.convert((Customer)updatedCustomer);
+			return customerConverter.convert(updatedCustomer);
 		}
 		return null;
 	}
