@@ -25,6 +25,9 @@ public class BottomDetails
 	@Column(name="BOTTOM_TYPE")
 	private String type;
 
+	@Column(name="COLOUR")
+	private String colour;
+	
 	public Long getId() {
 		return id;
 	}
@@ -39,6 +42,14 @@ public class BottomDetails
 
 	public void setType(String type) {
 		this.type = type;
+	}
+
+	public String getColour() {
+		return colour;
+	}
+
+	public void setColour(String colour) {
+		this.colour = colour;
 	}
 	
 }

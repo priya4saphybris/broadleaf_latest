@@ -25,6 +25,9 @@ public class TopDetails
 	@Column(name="TOP_TYPE")
 	private String type;
 
+	@Column(name="COLOUR")
+	private String colour;
+	
 	public Long getId() {
 		return id;
 	}
@@ -40,5 +43,12 @@ public class TopDetails
 	public void setType(String type) {
 		this.type = type;
 	}
-	
+
+	public String getColour() {
+		return colour;
+	}
+
+	public void setColour(String colour) {
+		this.colour = colour;
+	}
 }
