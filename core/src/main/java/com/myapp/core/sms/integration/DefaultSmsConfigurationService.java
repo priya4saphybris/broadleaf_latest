@@ -26,4 +26,10 @@ public class DefaultSmsConfigurationService implements SmsConfigurationService
 		return smsConfigurationDao.getConfiguration(configurationId);
 	}
 
+	@Override
+	public SmsConfiguration getConfiguration() 
+	{
+		return smsConfigurationDao.getConfiguration();
+	}
+
 }

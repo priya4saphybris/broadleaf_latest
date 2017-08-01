@@ -212,4 +212,12 @@
 	<bean id="addressFacade" class="com.myapp.core.catalog.facades.impl.DefaultAddressFacade">
 		<property name="addressConverter" ref="addressConverter"/>
 	</bean>
+	
+	<bean id="smsConfigurationDao" class="com.myapp.core.sms.integration.DefaultSmsConfigurationDao"/>
+	<bean id="smsConfigurationService" class="com.myapp.core.sms.integration.DefaultSmsConfigurationService">
+		<property name="smsConfigurationDao" ref="smsConfigurationDao"/>
+	</bean>
+	<bean id="smsService" class="com.myapp.core.sms.integration.DefaultSmsService">
+		<property name="smsConfigurationService" ref="smsConfigurationService"/>
+	</bean>
 </beans>
