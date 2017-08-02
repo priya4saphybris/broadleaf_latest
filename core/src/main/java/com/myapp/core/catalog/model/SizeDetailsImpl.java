@@ -5,7 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Cache;
@@ -24,17 +24,13 @@ public class SizeDetailsImpl
 	@Column(name="SIZE_DETAILS_ID")
 	private Long id;
 	
-	@OneToOne(targetEntity= MyCustomerImpl.class, optional = true, cascade = { javax.persistence.CascadeType.REFRESH })
+	@ManyToOne(targetEntity = MyCustomerImpl.class, optional = false, cascade = { javax.persistence.CascadeType.REFRESH })
 	@JoinColumn(name="CUSTOMER_ID")
 	private MyCustomer myCustomer;
 	
-	@OneToOne(targetEntity= TopDetails.class, optional = true, cascade = { javax.persistence.CascadeType.REFRESH })
+	@ManyToOne(targetEntity= FabricDetails.class, optional = true, cascade = { javax.persistence.CascadeType.REFRESH })
 	@JoinColumn(name="TOPDETAILS_ID")
-	private TopDetails topDetails;
-	
-	@OneToOne(targetEntity= BottomDetails.class, optional = true, cascade = { javax.persistence.CascadeType.REFRESH })
-	@JoinColumn(name="BOTTOMDETAILS_ID")
-	private BottomDetails bottomDetails;
+	private FabricDetails fabricDetails;
 
 	public Long getId() {
 		return id;
@@ -52,20 +48,12 @@ public class SizeDetailsImpl
 		this.myCustomer = myCustomer;
 	}
 
-	public TopDetails getTopDetails() {
-		return topDetails;
+	public FabricDetails getFabricDetails() {
+		return fabricDetails;
 	}
 
-	public void setTopDetails(TopDetails topDetails) {
-		this.topDetails = topDetails;
-	}
-
-	public BottomDetails getBottomDetails() {
-		return bottomDetails;
-	}
-
-	public void setBottomDetails(BottomDetails bottomDetails) {
-		this.bottomDetails = bottomDetails;
+	public void setFabricDetails(FabricDetails fabricDetails) {
+		this.fabricDetails = fabricDetails;
 	}
 	
 }

@@ -40,8 +40,11 @@
         <bean id="com.myapp.core.catalog.model.PaymentMode" class="com.myapp.core.catalog.model.PaymentModeImpl" scope="prototye"/>
         <bean id="com.myapp.core.catalog.model.SmsConfiguration" class="com.myapp.core.catalog.model.SmsConfigurationImpl" scope="prototye"/>
         
-        <!-- <bean id="com.myapp.core.catalog.model.TopDetails" class="com.myapp.core.catalog.model.TopDetails"/> -->
-        <!-- <bean id="com.myapp.core.catalog.model.BottomDetails" class="com.myapp.core.catalog.model.BottomDetails"/> -->
-        <bean id="com.myapp.core.catalog.model.TopDetails" class="com.myapp.core.catalog.model.ShirtDetailsImpl"/>
-        <bean id="com.myapp.core.catalog.model.BottomDetails" class="com.myapp.core.catalog.model.TrouserDetailsImpl"/>
+        <bean id="com.myapp.core.catalog.tailor.store.TailorStore" class="com.myapp.core.catalog.tailor.store.TailorStore" scope="prototye"/>
+        <bean id="com.myapp.core.catalog.model.FabricDetails" class="com.myapp.core.catalog.model.FabricDetails" scope="prototye"/>
+        <bean id="com.myapp.core.catalog.model.ShirtDetailsImpl" class="com.myapp.core.catalog.model.ShirtDetailsImpl" scope="prototye"/>
+        <bean id="com.myapp.core.catalog.model.TrouserDetailsImpl" class="com.myapp.core.catalog.model.TrouserDetailsImpl" scope="prototye"/>
+        <bean id="com.myapp.core.catalog.model.SizeDetailsImpl" class="com.myapp.core.catalog.model.SizeDetailsImpl" scope="prototye"/>
+        <bean id="com.myapp.core.catalog.tailor.store.TailorCustomerXref" class="com.myapp.core.catalog.tailor.store.TailorCustomerXref" scope="prototye"/>
+        <bean id="com.myapp.core.catalog.tailor.store.TailorFabricXref" class="com.myapp.core.catalog.tailor.store.TailorFabricXref" scope="prototye"/>
 </beans>

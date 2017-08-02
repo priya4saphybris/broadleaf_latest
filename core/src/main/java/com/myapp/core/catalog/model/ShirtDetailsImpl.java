@@ -10,7 +10,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @Entity
 @Table(name="SHIRT_DETAILS")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "blStandardElements")
-public class ShirtDetailsImpl extends TopDetails
+public class ShirtDetailsImpl extends FabricDetails
 {	
 	@Column(name="COLLAR")
 	private String collar;

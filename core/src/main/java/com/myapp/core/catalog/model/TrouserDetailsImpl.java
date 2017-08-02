@@ -10,7 +10,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @Entity
 @Table(name="TROUSER_DETAILS")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "blStandardElements")
-public class TrouserDetailsImpl extends BottomDetails
+public class TrouserDetailsImpl extends FabricDetails
 {
 	@Column(name="UNIT")
 	private String unit;

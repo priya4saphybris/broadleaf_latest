@@ -25,10 +25,13 @@
         <class>com.myapp.core.catalog.model.ServicesImpl</class>
         <class>com.myapp.core.catalog.model.PaymentModeImpl</class>
         <class>com.myapp.core.catalog.model.SmsConfigurationImpl</class>
-        <class>com.myapp.core.catalog.model.TopDetails</class>
-        <class>com.myapp.core.catalog.model.BottomDetails</class>
+        <class>com.myapp.core.catalog.model.FabricDetails</class>
         <class>com.myapp.core.catalog.model.ShirtDetailsImpl</class>
         <class>com.myapp.core.catalog.model.TrouserDetailsImpl</class>
+        <class>com.myapp.core.catalog.tailor.store.TailorStore</class>
+        <class>com.myapp.core.catalog.tailor.store.TailorCustomerXref</class>
+        <class>com.myapp.core.catalog.tailor.store.TailorFabricXref</class>
+        <class>com.myapp.core.catalog.model.SizeDetailsImpl</class>
         <exclude-unlisted-classes/>
     </persistence-unit>
     
