@@ -8,8 +8,6 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
 import org.broadleafcommerce.common.sandbox.SandBoxHelper;
-import org.broadleafcommerce.profile.core.domain.Customer;
-import org.broadleafcommerce.profile.core.domain.CustomerImpl;
 
 import com.myapp.core.catalog.dao.MyCustomerDao;
 import com.myapp.core.user.MyCustomer;
@@ -28,14 +26,16 @@ public class DefaultCustomerDao implements MyCustomerDao
 	public List<MyCustomer> readAllCustomers() {
 		TypedQuery query = this.em.createQuery("FROM "+com.myapp.core.user.MyCustomerImpl.class.getName(), MyCustomerImpl.class);
 		query.setHint("org.hibernate.cacheable", Boolean.valueOf(true));
-		query.setHint("org.hibernate.cacheRegion", "query.Catalog");
+		query.setHint("org.hibernate.cacheRegion", "query.Customer");
 		return query.getResultList();
 	}
 
 	@Override
 	public MyCustomer saveCustomer(MyCustomer myCustomer) 
 	{
-		return ((MyCustomer) this.em.merge(myCustomer));
+		MyCustomerImpl customer= (MyCustomerImpl) myCustomer;
+		this.em.persist(customer);
+		return findCustomerForId(customer.getId());
 	}
 
 	@Override

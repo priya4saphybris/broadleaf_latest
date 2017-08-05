@@ -33,11 +33,9 @@ public class CustomerPopulator implements Populator<MyCustomer, CustomerData>
 		
 		if(source instanceof MyCustomer)
 		{
-			MyCustomer myCustomer= (MyCustomer)source;
-			
-			if(null != myCustomer.getArea())
+			if(null != source.getArea())
 			{
-				AreaData areaData=areaConverter.convert(myCustomer.getArea());
+				AreaData areaData=areaConverter.convert(source.getArea());
 				target.setAreaData(areaData);
 			}
 		}
