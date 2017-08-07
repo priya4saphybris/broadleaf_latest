@@ -1,6 +1,7 @@
 package com.myapp.core.catalog.model;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
@@ -23,6 +24,21 @@ public class MyProductImpl extends ProductImpl implements MyProduct
 	@Index(name = "STORE_PARENT_INDEX", columnNames = { "DEFAULT_STORE_ID" })
 	private Store store;
 	
+	@Column(name="CODE", nullable= false)
+	private String code;
+	
+	@Column(name="MAIN_IMAGE")
+	private String mainImage;
+	
+	@Column(name="MAIN_IMAGE_HR")
+	private String mainImageHighRes;
+	
+	@Column(name="CURRENCY")
+	private String currency;
+	
+	@Column(name="REMOTE_ID")
+	private Long remoteId;
+	
 	@Override
 	public void setStore(Store store) 
 	{
@@ -33,6 +49,56 @@ public class MyProductImpl extends ProductImpl implements MyProduct
 	public Store getStore() 
 	{
 		return this.store;
+	}
+
+	@Override
+	public String getCode() {
+		return code;
+	}
+
+	@Override
+	public void setCode(String code) {
+		this.code = code;
+	}
+
+	@Override
+	public String getMainImage() {
+		return mainImage;
+	}
+
+	@Override
+	public void setMainImage(String mainImage) {
+		this.mainImage = mainImage;
+	}
+
+	@Override
+	public String getMainImageHighRes() {
+		return mainImageHighRes;
+	}
+
+	@Override
+	public void setMainImageHighRes(String mainImageHighRes) {
+		this.mainImageHighRes = mainImageHighRes;
+	}
+
+	@Override
+	public String getCurrency() {
+		return currency;
+	}
+
+	@Override
+	public void setCurrency(String currency) {
+		this.currency = currency;
+	}
+
+	@Override
+	public Long getRemoteId() {
+		return remoteId;
+	}
+
+	@Override
+	public void setRemoteId(Long remoteId) {
+		this.remoteId = remoteId;
 	}
 	
 }
