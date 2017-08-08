@@ -14,11 +14,19 @@ public class ProductListDataPopulator implements Populator<Product, ProductItemD
 	{
 		target.setId(target.getId());
 		target.setCategory(source.getCategory().getId());
-		//target.setCurrency(source.getC);
+		target.setCurrency("INR");
 		target.setDescription(source.getDescription());
-		//target.setDiscountPrice(source.getPrice);
 		target.setUrl(target.getUrl());
-		
+		if(null != source.getRetailPrice() && null !=source.getRetailPrice().getAmount())
+		{
+			target.setPrice(Double.valueOf(source.getRetailPrice().getAmount().doubleValue()));
+			target.setPriceFormatted(source.getRetailPrice().getAmount().toString());
+		}
+		if(null != source.getSalePrice() && null != source.getSalePrice().getAmount())
+		{
+			target.setDiscountPrice(Double.valueOf(source.getSalePrice().getAmount().toString()));
+			target.setDiscountPriceFormatted(source.getSalePrice().getAmount().toString());
+		}
 	}
 	
 }

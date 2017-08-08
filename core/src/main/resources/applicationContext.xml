@@ -51,6 +51,13 @@
 		</property>
 	</bean>
 	
+	<bean id="productListConverter" parent="abstractPopulatingConverter">
+		<property name="com.myapp.core.catalog.beans.ProductItemData"/>
+		<property name="populators">
+			
+		</property>
+	</bean>
+	
 	<bean id="storeConverter" parent="abstractPopulatingConverter">
 		<property name="targetClass" value="com.myapp.core.beans.StoreData"/>
 		<property name="populators">
@@ -219,5 +226,16 @@
 	</bean>
 	<bean id="smsService" class="com.myapp.core.sms.integration.DefaultSmsService">
 		<property name="smsConfigurationService" ref="smsConfigurationService"/>
+	</bean>
+	
+	<bean id="productListDataPopulator" class="com.myapp.core.catalog.populators.ProductListDataPopulator"/>
+	
+	<bean class="productListConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="com.myapp.core.catalog.beans.ProductListData"/>
+		<property name="populators">
+			<list>
+				<ref bean="productListDataPopulator"/>
+			</list>
+		</property>
 	</bean>
 </beans>
