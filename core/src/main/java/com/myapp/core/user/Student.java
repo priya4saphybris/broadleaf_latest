@@ -6,10 +6,12 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import com.myapp.core.education.standard.Standard;
 
 @Table
 @Entity(name="STUDENT")
@@ -20,6 +22,12 @@ public class Student
 	@GeneratedValue
 	@Column(name = "STUDENT_ID", nullable = false)
 	private Long id;
+	
+	@Column(name = "FIRST_NAME", nullable = false)
+	private String firstName;
+	
+	@Column(name = "LAST_NAME", nullable = false)
+	private String lastName;
 	
 	@Column(name = "PURSUING", nullable = false)
 	private boolean pursuing;
@@ -36,6 +44,21 @@ public class Student
 	@Column(name = "SECTION", nullable = true)
 	private String section;
 	
+	@Column(name = "DOB", nullable = true)
+	private Date dob;
+	
+	@ManyToOne(targetEntity= Standard.class, optional = true, cascade = { javax.persistence.CascadeType.REFRESH })
+	@JoinColumn(name="STANDARD")
+	private Standard standard;
+	
+	public Standard getStandard() {
+		return standard;
+	}
+
+	public void setStandard(Standard standard) {
+		this.standard = standard;
+	}
+
 	public Date getDateOfJoining() {
 		return dateOfJoining;
 	}
@@ -83,4 +106,29 @@ public class Student
 	public void setSection(String section) {
 		this.section = section;
 	}
+
+	public Date getDob() {
+		return dob;
+	}
+
+	public void setDob(Date dob) {
+		this.dob = dob;
+	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+	
 }

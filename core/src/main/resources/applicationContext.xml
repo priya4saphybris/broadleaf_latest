@@ -238,4 +238,10 @@
 			</list>
 		</property>
 	</bean>
+	
+	<bean id="studentPopulator" class="com.myapp.core.education.populator.StudentPopulator"/>
+	
+	<bean id="studentConvert" parent="abstractPopulatingConverter">
+		<property name="targetClass"></property>
+	</bean>
 </beans>
