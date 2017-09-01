@@ -9,6 +9,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import org.broadleafcommerce.profile.core.domain.Customer;
+import org.broadleafcommerce.profile.core.domain.CustomerImpl;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import com.myapp.core.education.standard.Standard;
@@ -50,6 +53,10 @@ public class Student
 	@ManyToOne(targetEntity= Standard.class, optional = true, cascade = { javax.persistence.CascadeType.REFRESH })
 	@JoinColumn(name="STANDARD")
 	private Standard standard;
+	
+	@ManyToOne(targetEntity= CustomerImpl.class, optional = true, cascade = { javax.persistence.CascadeType.REFRESH })
+	@JoinColumn(name="GUARDIAN")
+	private Customer customer;
 	
 	public Standard getStandard() {
 		return standard;
@@ -129,6 +136,14 @@ public class Student
 
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
+	}
+
+	public Customer getCustomer() {
+		return customer;
+	}
+
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
 	}
 	
 }

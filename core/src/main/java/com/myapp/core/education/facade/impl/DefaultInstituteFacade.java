@@ -14,6 +14,15 @@ public class DefaultInstituteFacade implements InstituteFacade
 	
 	private Converter<Institute, InstituteData> instituteConverter;
 	
+	
+	public Converter<Institute, InstituteData> getInstituteConverter() {
+		return instituteConverter;
+	}
+
+	public void setInstituteConverter(Converter<Institute, InstituteData> instituteConverter) {
+		this.instituteConverter = instituteConverter;
+	}
+
 	public InstituteService getInstituteService() {
 		return instituteService;
 	}

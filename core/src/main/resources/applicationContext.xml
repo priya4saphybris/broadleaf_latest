@@ -242,6 +242,48 @@
 	<bean id="studentPopulator" class="com.myapp.core.education.populator.StudentPopulator"/>
 	
 	<bean id="studentConvert" parent="abstractPopulatingConverter">
-		<property name="targetClass"></property>
+		<property name="targetClass" value="com.myapp.core.education.beans.StudentData">
+			<list>
+				<ref bean="studentPopulator"/>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="institutePopulator" class="com.myapp.core.education.populator.StudentPopulator"/>
+	
+	<bean id="instituteConvert" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="com.myapp.core.education.beans.InstituteData">
+			<list>
+				<ref bean="institutePopulator"/>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="standardPopulator" class="com.myapp.core.education.populator.StandardPopulator"/>
+	
+	<bean id="standardConvert" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="com.myapp.core.education.beans.StandardData">
+			<list>
+				<ref bean="standardPopulator"/>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="studentDao" class="com.myapp.core.education.dao.impl.DefaultStudentDao"/>
+	<bean id="studentService" class="com.myapp.core.education.service.impl.DefaultStudentService">
+		<property name="studentDao" ref="studentDao"/>
+	</bean>
+	<bean id="studentFacade" class="com.myapp.core.education.facade.impl.DefaultStudentFacade">
+		<property name="studentService" ref="studentService"/>
+		<property name="studentConverter" ref="studentConverter"/>
+	</bean>
+	
+	<bean id="instituteDao" class="com.myapp.core.education.dao.impl.DefaultInstituteDao"/>
+	<bean id="instituteService" class="com.myapp.core.education.service.impl.DefaultInstituteService">
+		<property name="instituteDao" ref="instituteDao"/>
+	</bean>
+	<bean id="instituteFacade" class="com.myapp.core.education.facade.impl.DefaultInstituteFacade">
+		<property name="instituteService" ref="instituteService"/>
+		<property name="instituteConverter" ref="instituteConverter"/>
 	</bean>
 </beans>

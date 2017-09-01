@@ -6,7 +6,7 @@ import com.myapp.core.education.dao.InstituteDao;
 import com.myapp.core.education.organization.Institute;
 import com.myapp.core.education.service.InstituteService;
 
-public class DefaultInstitueService implements InstituteService
+public class DefaultInstituteService implements InstituteService
 {
 	private InstituteDao instituteDao;
 	
