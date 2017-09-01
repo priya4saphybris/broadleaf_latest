@@ -1,5 +1,6 @@
 package com.myapp.core.user;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -19,6 +20,17 @@ public class MyCustomerImpl extends CustomerImpl implements MyCustomer
 	@ManyToOne(targetEntity= AreaImpl.class, optional = true, cascade = { javax.persistence.CascadeType.REFRESH })
 	@JoinColumn(name="AREA_ID")
 	private Area area;
+
+	@Column(name = "ACCESS_TOKEN", nullable = false)
+	private String accessToken;
+	
+	public String getAccessToken() {
+		return accessToken;
+	}
+
+	public void setAccessToken(String accessToken) {
+		this.accessToken = accessToken;
+	}
 
 	public Area getArea() {
 		return area;

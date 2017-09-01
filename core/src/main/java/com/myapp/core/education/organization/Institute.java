@@ -29,11 +29,17 @@ public class Institute
 	@Column(name = "DESCIPTION", nullable = false)
 	private String description;
 
-	@Column(name = "DESCIPTION", nullable = false)
+	@Column(name = "BREAK_TIME", nullable = false)
 	private String breakTime;
 	
-	@Column(name = "DESCIPTION", nullable = false)
+	@Column(name = "TIMINGS", nullable = false)
 	private String timings;
+	
+	@Column(name = "CONTACT_NUMBER_1", nullable = false)
+	private String contactNumber1;
+	
+	@Column(name = "CONTACT_NUMBER_2", nullable = false)
+	private String contactNumber2;
 	
 	public Long getId() {
 		return id;

@@ -20,6 +20,7 @@ public abstract class AbstractConverter<SOURCE, TARGET> implements Converter<SOU
 	@Override
 	public abstract void populate(final SOURCE source, final TARGET target);
 	
+	@Override
 	public List<TARGET> convertAll(List<SOURCE> sourceList)
 	{
 		List<TARGET> targetList= new ArrayList<TARGET>();
@@ -58,7 +59,7 @@ public abstract class AbstractConverter<SOURCE, TARGET> implements Converter<SOU
 		populate(source, target);
 		return target;
 	}
-
+	
 	@Override
 	public void afterPropertiesSet() throws Exception 
 	{
