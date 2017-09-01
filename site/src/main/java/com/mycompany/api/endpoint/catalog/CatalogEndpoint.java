@@ -16,6 +16,13 @@
 
 package com.mycompany.api.endpoint.catalog;
 
+import org.broadleafcommerce.common.exception.ServiceException;
+import org.broadleafcommerce.core.catalog.domain.Category;
+import org.broadleafcommerce.core.catalog.domain.Product;
+import org.broadleafcommerce.core.search.domain.SearchCriteria;
+import org.broadleafcommerce.core.search.domain.SearchFacetDTO;
+import org.broadleafcommerce.core.search.domain.SearchResult;
+import org.broadleafcommerce.core.web.api.BroadleafWebServicesException;
 import org.broadleafcommerce.core.web.api.wrapper.CategoriesWrapper;
 import org.broadleafcommerce.core.web.api.wrapper.CategoryAttributeWrapper;
 import org.broadleafcommerce.core.web.api.wrapper.CategoryWrapper;
@@ -27,6 +34,7 @@ import org.broadleafcommerce.core.web.api.wrapper.RelatedProductWrapper;
 import org.broadleafcommerce.core.web.api.wrapper.SearchResultsWrapper;
 import org.broadleafcommerce.core.web.api.wrapper.SkuAttributeWrapper;
 import org.broadleafcommerce.core.web.api.wrapper.SkuWrapper;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,8 +42,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.myapp.core.catalog.beans.MetaData;
+import com.myapp.core.catalog.beans.ProductItemData;
+import com.myapp.core.catalog.beans.ProductListData;
+import com.myapp.core.converter.Converter;
+
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -47,18 +62,86 @@ import javax.servlet.http.HttpServletRequest;
  *
  */
 @RestController
-@RequestMapping(value = "/catalog/",
+@RequestMapping(value = "/**/catalog/",
     produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
     consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
 public class CatalogEndpoint extends
         org.broadleafcommerce.core.web.api.endpoint.catalog.CatalogEndpoint {
 
+	@Resource(name="productListConverter")
+	private Converter<Product, ProductItemData> productListConverter;
+	
     @Override
     @RequestMapping(value = "product/{id}", method = RequestMethod.GET)
     public ProductWrapper findProductById(HttpServletRequest request, @PathVariable("id") Long id) {
         return super.findProductById(request, id);
     }
 
+    @RequestMapping(value = "c/{categoryId}", method = RequestMethod.GET)
+    public void getProductsForCategory(HttpServletRequest request,
+    		@PathVariable("categoryId") Long categoryId,
+    		@RequestParam(value = "pageSize", defaultValue = "15") Integer pageSize,
+    		@RequestParam(value = "page", defaultValue = "1") Integer page)
+    {
+    	findSearchResultsByCategory(request,categoryId,pageSize,page);
+    }
+    
+    @SuppressWarnings("deprecation")
+	private void findSearchResultsByCategory(HttpServletRequest request,Long categoryId,Integer pageSize,Integer page)
+    {
+    	SearchCriteria searchCriteria = facetService.buildSearchCriteria(request);
+    	searchCriteria.setPageSize(pageSize);
+		searchCriteria.setPage(page);
+		
+		SearchResult result = null;
+		
+		Category category = null;
+		category = this.catalogService.findCategoryById(categoryId);
+		if (category == null) 
+		{
+			throw BroadleafWebServicesException.build(HttpStatus.BAD_REQUEST.value()).addMessage(
+					"org.broadleafcommerce.core.web.api.BroadleafWebServicesException.invalidCategoryId", categoryId);
+		}
+		
+		try 
+		{
+			result = getSearchService().findExplicitSearchResultsByCategory(category,searchCriteria);
+			this.facetService.setActiveFacetResults(result.getFacets(), request);
+			List<SearchFacetDTO> facets= result.getFacets();
+			List<Product> products= result.getProducts();
+			
+			ProductListData productListData= new ProductListData();
+			List<ProductItemData> productsdata= new ArrayList<ProductItemData>();
+			
+			for(Product product: products)
+			{
+				productsdata.add(productListConverter.convert(product));
+			}
+			productListData.setRecords(productsdata);
+			
+			int totalpages=result.getTotalPages();
+			int pageNumber=result.getPage();
+			int startPage=result.getStartResult();
+			int endPage= result.getEndResult();
+			int recordsCount= result.getTotalResults();
+			
+			List<SearchFacetDTO> facetResults=result.getFacets();
+			
+			for(SearchFacetDTO facet: facetResults)
+			{
+				
+			}
+			
+			MetaData metaData= new MetaData();
+			metaData.setRecordsCount(recordsCount);
+		}
+		catch (ServiceException e) 
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    }
+    
     @Override
     @RequestMapping(value = "search", method = RequestMethod.GET)
     public SearchResultsWrapper findSearchResultsByQuery(HttpServletRequest request,

@@ -34,7 +34,7 @@ public class RCheckoutController extends RCommonController
 			//
 		}
 		
-		MyCustomer customer= getCurrentCustomer();
+		MyCustomer customer= getCurrentCustomer();	
 		Area area=customer.getArea();
 		
 		if(null != area && null != area.getCityCode())

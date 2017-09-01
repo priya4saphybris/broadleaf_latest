@@ -36,7 +36,7 @@ import javax.servlet.http.HttpServletRequest;
  *
  */
 @RestController
-@RequestMapping(value = "/cart",
+@RequestMapping(value = "/**/cart",
     produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
     consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
 public class CartEndpoint extends org.broadleafcommerce.core.web.api.endpoint.order.CartEndpoint {

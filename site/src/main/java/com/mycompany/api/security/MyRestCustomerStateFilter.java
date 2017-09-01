@@ -13,24 +13,22 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.broadleafcommerce.common.extension.ExtensionResultHolder;
-import org.broadleafcommerce.core.order.domain.Order;
 import org.broadleafcommerce.core.web.order.security.CartStateRequestProcessor;
-import org.broadleafcommerce.core.web.order.security.CartStateRequestProcessorExtensionHandler;
-import org.broadleafcommerce.core.web.order.security.CartStateRequestProcessorExtensionManager;
 import org.broadleafcommerce.profile.core.domain.Customer;
-import org.broadleafcommerce.profile.core.service.CustomerService;
 import org.broadleafcommerce.profile.web.core.CustomerState;
 import org.broadleafcommerce.profile.web.core.security.CustomerStateRequestProcessor;
 import org.springframework.core.Ordered;
 import org.springframework.web.context.request.ServletWebRequest;
 import org.springframework.web.filter.GenericFilterBean;
 
+import com.myapp.core.catalog.service.MyCustomerService;
+import com.myapp.core.user.MyCustomer;
+
 public class MyRestCustomerStateFilter extends GenericFilterBean implements Ordered
 {
 	protected static final Log LOG = LogFactory.getLog(MyRestCustomerStateFilter.class);
-	@Resource(name = "blCustomerService")
-	protected CustomerService customerService;
+	@Resource(name = "myCustomerService")
+	protected MyCustomerService customerService;
 	public static final String CUSTOMER_ID_ATTRIBUTE = "customerId";
 	
 	@Resource(name = "blCartStateRequestProcessor")
@@ -61,9 +59,9 @@ public class MyRestCustomerStateFilter extends GenericFilterBean implements Orde
 
 			if ((customerId != null) && (customerId.trim().length() > 0)) {
 				if (NumberUtils.isNumber(customerId)) {
-					Customer customer = this.customerService.readCustomerById(Long.valueOf(customerId));
+					MyCustomer customer = this.customerService.readCustomerById(Long.valueOf(customerId));
 					if (customer != null)
-						CustomerState.setCustomer(customer);
+						CustomerState.setCustomer((Customer)customer);
 					
 					this.cartStateProcessor.process(new ServletWebRequest(request, response));
 				} else {
@@ -79,7 +77,7 @@ public class MyRestCustomerStateFilter extends GenericFilterBean implements Orde
 
 		}
 
-		filterChain.doFilter(request, servletResponse);
+		filterChain.doFilter(servletRequest, servletResponse);
 	
 		
 	}

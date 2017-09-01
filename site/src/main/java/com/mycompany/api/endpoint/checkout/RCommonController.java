@@ -11,11 +11,13 @@ import org.broadleafcommerce.core.order.service.OrderService;
 import org.broadleafcommerce.core.pricing.service.exception.PricingException;
 import org.broadleafcommerce.core.web.order.CartState;
 import org.broadleafcommerce.profile.core.domain.Address;
+import org.broadleafcommerce.profile.core.domain.Customer;
 import org.broadleafcommerce.profile.web.core.CustomerState;
 
 import com.myapp.core.beans.RegionData;
 import com.myapp.core.catalog.facades.LocationFacade;
 import com.myapp.core.catalog.model.Area;
+import com.myapp.core.catalog.service.MyCustomerService;
 import com.myapp.core.user.MyCustomer;
 
 public class RCommonController 
@@ -31,6 +33,9 @@ public class RCommonController
 	
 	@Resource(name = "blFulfillmentOptionService")
 	protected FulfillmentOptionService fulfillmentOptionService;
+	
+	@Resource(name = "myCustomerService")
+	protected MyCustomerService customerService;
 	
 	public boolean requiredLogin()
 	{
@@ -54,7 +59,9 @@ public class RCommonController
 	{
 		if(null != CustomerState.getCustomer())
 		{
-			return (MyCustomer) CustomerState.getCustomer();
+			Customer customer=CustomerState.getCustomer();
+			MyCustomer myCustomer= customerService.readCustomerById(customer.getId());
+			return myCustomer;
 		}
 		return null;
 	}

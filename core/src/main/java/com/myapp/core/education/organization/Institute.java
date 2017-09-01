@@ -6,10 +6,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name="INSTITUTE")
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "blStandardElements")
 public class Institute 
 {
 	@Id
@@ -26,6 +29,12 @@ public class Institute
 	@Column(name = "DESCIPTION", nullable = false)
 	private String description;
 
+	@Column(name = "DESCIPTION", nullable = false)
+	private String breakTime;
+	
+	@Column(name = "DESCIPTION", nullable = false)
+	private String timings;
+	
 	public Long getId() {
 		return id;
 	}
@@ -48,5 +57,21 @@ public class Institute
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public String getBreakTime() {
+		return breakTime;
+	}
+
+	public void setBreakTime(String breakTime) {
+		this.breakTime = breakTime;
+	}
+
+	public String getTimings() {
+		return timings;
+	}
+
+	public void setTimings(String timings) {
+		this.timings = timings;
 	}
 }

@@ -32,7 +32,7 @@ import com.myapp.core.catalog.facades.CustomerFacade;
 import com.myapp.core.forms.MyCustomerForm;
 
 @Controller
-@RequestMapping("/customer")
+@RequestMapping("/**/customer")
 public class MyCustomerController 
 {
 	private static final Logger LOG= Logger.getLogger(MyCustomerController.class);
@@ -79,7 +79,7 @@ public class MyCustomerController
 		return rmd;
 	}
 	
-	@RequestMapping(value="/list", method= RequestMethod.GET)
+	@RequestMapping(value="/list", method= RequestMethod.GET, produces="application/json")
 	@ResponseBody
 	public List<CustomerData> getCustomers()
 	{

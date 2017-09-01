@@ -50,6 +50,7 @@
 	<context:component-scan base-package="com.myadmin.api.controllers"/>
 	<context:component-scan base-package="com.myadmin.api.admin.controllers"/>
 	<context:component-scan base-package="com.mycompany.api.customer.controller"/>
+	<context:component-scan base-package="com.mycompany.api.endpoint.catalog"/>
     <!-- Allow annotation driven controllers -->
     <mvc:annotation-driven/>
 

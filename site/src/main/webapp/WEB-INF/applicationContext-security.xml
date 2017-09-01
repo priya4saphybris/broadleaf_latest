@@ -93,6 +93,7 @@
                 <value>/store/**</value>
                 <value>/reviews/store/**</value>
                 <value>/location/**</value>
+                <value>/cart/**</value>
             </list>
         </property>
     </bean>
