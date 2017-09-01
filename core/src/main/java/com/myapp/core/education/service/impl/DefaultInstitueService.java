@@ -1,4 +1,4 @@
-package com.myapp.core.education.dao.impl;
+package com.myapp.core.education.service.impl;
 
 import java.util.List;
 
@@ -10,6 +10,15 @@ public class DefaultInstitueService implements InstituteService
 {
 	private InstituteDao instituteDao;
 	
+	
+	public InstituteDao getInstituteDao() {
+		return instituteDao;
+	}
+
+	public void setInstituteDao(InstituteDao instituteDao) {
+		this.instituteDao = instituteDao;
+	}
+
 	@Override
 	public Institute save(Institute institute) 
 	{

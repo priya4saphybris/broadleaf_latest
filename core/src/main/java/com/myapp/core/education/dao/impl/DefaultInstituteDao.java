@@ -1,4 +1,4 @@
-package com.myapp.core.education.organization;
+package com.myapp.core.education.dao.impl;
 
 import java.util.List;
 
@@ -7,6 +7,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
 import com.myapp.core.education.dao.InstituteDao;
+import com.myapp.core.education.organization.Institute;
 
 public class DefaultInstituteDao implements InstituteDao
 {
