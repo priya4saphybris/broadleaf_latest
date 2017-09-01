@@ -38,4 +38,10 @@ public class DefaultStudentService implements StudentService
 		return studentDao.getStudents();
 	}
 
+	@Override
+	public List<Student> getStudentsForCustomer(Long id) 
+	{
+		return studentDao.getStudentsForCustomer(id);
+	}
+
 }

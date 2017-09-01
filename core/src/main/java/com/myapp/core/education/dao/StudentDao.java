@@ -9,4 +9,5 @@ public interface StudentDao
 	Student save(Student student);
 	Student getStudent(Long id);
 	List<Student> getStudents();
+	List<Student> getStudentsForCustomer(Long id);
 }

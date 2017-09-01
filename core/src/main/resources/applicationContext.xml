@@ -286,4 +286,13 @@
 		<property name="instituteService" ref="instituteService"/>
 		<property name="instituteConverter" ref="instituteConverter"/>
 	</bean>
+	
+	<bean id="standardDao" class="com.myapp.core.education.dao.impl.DefaultStandardDao"/>
+	<bean id="standardService" class="com.myapp.core.education.service.impl.DefaultStandardService">
+		<property name="standardDao" ref="standardDao"/>
+	</bean>
+	<bean id="standardFacade" class="com.myapp.core.education.facade.impl.DefaultStandardFacade">
+		<property name="standardService" ref="standardService"/>
+		<property name="standardConverter" ref="standardConverter"/>
+	</bean>
 </beans>

@@ -1,5 +1,7 @@
 package com.myapp.core.education.beans;
 
+import com.myapp.core.beans.CustomerData;
+
 public class StudentData
 {
 	private Long id;
@@ -8,6 +10,9 @@ public class StudentData
 	private String rollNumber;
 	private String standard;
 	private String age;
+	private CustomerData customerData;
+	private StandardData standardData;
+	private InstituteData instituteData;
 	
 	public Long getId() {
 		return id;
@@ -45,4 +50,23 @@ public class StudentData
 	public void setAge(String age) {
 		this.age = age;
 	}
+	public StandardData getStandardData() {
+		return standardData;
+	}
+	public void setStandardData(StandardData standardData) {
+		this.standardData = standardData;
+	}
+	public CustomerData getCustomerData() {
+		return customerData;
+	}
+	public void setCustomerData(CustomerData customerData) {
+		this.customerData = customerData;
+	}
+	public InstituteData getInstituteData() {
+		return instituteData;
+	}
+	public void setInstituteData(InstituteData instituteData) {
+		this.instituteData = instituteData;
+	}
+	
 }

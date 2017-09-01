@@ -35,4 +35,15 @@ public class DefaultStudentDao implements StudentDao
 		return query.getResultList();
 	}
 
+	@Override
+	public List<Student> getStudentsForCustomer(Long id) 
+	{
+		TypedQuery<Student> query = this.em.createQuery("FROM "+com.myapp.core.user.Student.class.getName()+" student "
+				+ "WHERE student.customer.id =:customerid", Student.class);
+		query.setParameter("customerid", id);
+		query.setHint("org.hibernate.cacheable", Boolean.valueOf(true));
+		query.setHint("org.hibernate.cacheRegion", "blStandardElements");
+		return query.getResultList();
+	}
+
 }

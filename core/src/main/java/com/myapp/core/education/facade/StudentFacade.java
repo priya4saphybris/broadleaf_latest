@@ -8,5 +8,6 @@ public interface StudentFacade
 {
 	StudentData save(StudentData student);
 	StudentData getStudent(Long id);
+	List<StudentData> getStudentsForCustomer(Long id);
 	List<StudentData> getStudents();
 }

@@ -2,6 +2,9 @@ package com.myapp.core.education.facade.impl;
 
 import java.util.List;
 
+import org.broadleafcommerce.profile.core.domain.Customer;
+import org.broadleafcommerce.profile.core.service.CustomerService;
+
 import com.myapp.core.converter.Converter;
 import com.myapp.core.education.beans.StudentData;
 import com.myapp.core.education.facade.StudentFacade;
@@ -14,7 +17,16 @@ public class DefaultStudentFacade implements StudentFacade
 	
 	private Converter<Student, StudentData> studentConverter;
 	
+	private CustomerService customerService;
 	
+	public CustomerService getCustomerService() {
+		return customerService;
+	}
+
+	public void setCustomerService(CustomerService customerService) {
+		this.customerService = customerService;
+	}
+
 	public Converter<Student, StudentData> getStudentConverter() {
 		return studentConverter;
 	}
@@ -35,6 +47,12 @@ public class DefaultStudentFacade implements StudentFacade
 	public StudentData save(StudentData studentData) 
 	{
 		Student student= new Student();
+		if(null != studentData.getCustomerid())
+		{
+			Customer customer=customerService.readCustomerById(studentData.getId());
+			student.setCustomer(customer);
+		}
+		
 		student=studentService.save(student);
 		return studentConverter.convert(student);
 	}
@@ -49,6 +67,13 @@ public class DefaultStudentFacade implements StudentFacade
 	public List<StudentData> getStudents() 
 	{
 		List<Student> students= studentService.getStudents();
+		return studentConverter.convertAll(students);
+	}
+
+	@Override
+	public List<StudentData> getStudentsForCustomer(Long id) 
+	{
+		List<Student> students= studentService.getStudentsForCustomer(id);
 		return studentConverter.convertAll(students);
 	}
 

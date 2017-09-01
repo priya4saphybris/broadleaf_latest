@@ -14,6 +14,8 @@ import org.broadleafcommerce.profile.core.domain.Customer;
 import org.broadleafcommerce.profile.core.domain.CustomerImpl;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+
+import com.myapp.core.education.organization.Institute;
 import com.myapp.core.education.standard.Standard;
 
 @Table
@@ -57,6 +59,10 @@ public class Student
 	@ManyToOne(targetEntity= CustomerImpl.class, optional = true, cascade = { javax.persistence.CascadeType.REFRESH })
 	@JoinColumn(name="GUARDIAN")
 	private Customer customer;
+	
+	@ManyToOne(targetEntity= Institute.class, optional = true, cascade = { javax.persistence.CascadeType.REFRESH })
+	@JoinColumn(name="INSTITUTE")
+	private Institute institute;
 	
 	public Standard getStandard() {
 		return standard;
@@ -145,5 +151,12 @@ public class Student
 	public void setCustomer(Customer customer) {
 		this.customer = customer;
 	}
-	
+
+	public Institute getInstitute() {
+		return institute;
+	}
+
+	public void setInstitute(Institute institute) {
+		this.institute = institute;
+	}
 }
