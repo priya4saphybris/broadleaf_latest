@@ -4,8 +4,11 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.broadleafcommerce.profile.core.domain.Address;
+import org.broadleafcommerce.profile.core.domain.AddressImpl;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.GenericGenerator;
@@ -40,6 +43,9 @@ public class Institute
 	
 	@Column(name = "CONTACT_NUMBER_2", nullable = false)
 	private String contactNumber2;
+	
+	@ManyToOne(targetEntity= AddressImpl.class, optional = true, cascade = { javax.persistence.CascadeType.REFRESH })
+	private Address address;
 	
 	public Long getId() {
 		return id;
@@ -95,6 +101,14 @@ public class Institute
 
 	public void setContactNumber2(String contactNumber2) {
 		this.contactNumber2 = contactNumber2;
+	}
+
+	public Address getAddress() {
+		return address;
+	}
+
+	public void setAddress(Address address) {
+		this.address = address;
 	}
 	
 }
