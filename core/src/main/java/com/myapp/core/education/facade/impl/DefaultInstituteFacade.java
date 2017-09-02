@@ -6,6 +6,7 @@ import com.myapp.core.converter.Converter;
 import com.myapp.core.education.beans.InstituteData;
 import com.myapp.core.education.facade.InstituteFacade;
 import com.myapp.core.education.organization.Institute;
+import com.myapp.core.education.populator.InstituteReversePopulator;
 import com.myapp.core.education.service.InstituteService;
 
 public class DefaultInstituteFacade implements InstituteFacade
@@ -14,7 +15,16 @@ public class DefaultInstituteFacade implements InstituteFacade
 	
 	private Converter<Institute, InstituteData> instituteConverter;
 	
+	private InstituteReversePopulator instituteReversePopulator;
 	
+	public InstituteReversePopulator getInstituteReversePopulator() {
+		return instituteReversePopulator;
+	}
+
+	public void setInstituteReversePopulator(InstituteReversePopulator instituteReversePopulator) {
+		this.instituteReversePopulator = instituteReversePopulator;
+	}
+
 	public Converter<Institute, InstituteData> getInstituteConverter() {
 		return instituteConverter;
 	}
@@ -35,6 +45,7 @@ public class DefaultInstituteFacade implements InstituteFacade
 	public InstituteData save(InstituteData instituteData) 
 	{
 		Institute institute= new Institute();
+		instituteReversePopulator.populate(instituteData, institute);
 		institute= instituteService.save(institute);
 		return instituteConverter.convert(institute);
 	}

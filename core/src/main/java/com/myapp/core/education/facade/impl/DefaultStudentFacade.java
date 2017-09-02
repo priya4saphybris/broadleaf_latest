@@ -8,6 +8,7 @@ import org.broadleafcommerce.profile.core.service.CustomerService;
 import com.myapp.core.converter.Converter;
 import com.myapp.core.education.beans.StudentData;
 import com.myapp.core.education.facade.StudentFacade;
+import com.myapp.core.education.populator.StudentReversePopulator;
 import com.myapp.core.education.service.StudentService;
 import com.myapp.core.user.Student;
 
@@ -17,14 +18,14 @@ public class DefaultStudentFacade implements StudentFacade
 	
 	private Converter<Student, StudentData> studentConverter;
 	
-	private CustomerService customerService;
+	private StudentReversePopulator standardReversePopulator;
 	
-	public CustomerService getCustomerService() {
-		return customerService;
+	public StudentReversePopulator getStandardReversePopulator() {
+		return standardReversePopulator;
 	}
 
-	public void setCustomerService(CustomerService customerService) {
-		this.customerService = customerService;
+	public void setStandardReversePopulator(StudentReversePopulator standardReversePopulator) {
+		this.standardReversePopulator = standardReversePopulator;
 	}
 
 	public Converter<Student, StudentData> getStudentConverter() {
@@ -46,13 +47,12 @@ public class DefaultStudentFacade implements StudentFacade
 	@Override
 	public StudentData save(StudentData studentData) 
 	{
-		Student student= new Student();
-		if(null != studentData.getCustomerid())
+		if(null == studentData)
 		{
-			Customer customer=customerService.readCustomerById(studentData.getId());
-			student.setCustomer(customer);
+			return studentData;
 		}
-		
+		Student student= new Student();
+		standardReversePopulator.populate(studentData, student);
 		student=studentService.save(student);
 		return studentConverter.convert(student);
 	}

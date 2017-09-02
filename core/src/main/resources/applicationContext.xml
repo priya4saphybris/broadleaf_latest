@@ -249,8 +249,8 @@
 		</property>
 	</bean>
 	
-	<bean id="institutePopulator" class="com.myapp.core.education.populator.StudentPopulator"/>
-	
+	<bean id="institutePopulator" class="com.myapp.core.education.populator.InstitutePopulator"/>
+	<bean id="instituteReversePopulator" class="com.myapp.core.education.populator.InstituteReversePopulator"/>
 	<bean id="instituteConvert" parent="abstractPopulatingConverter">
 		<property name="targetClass" value="com.myapp.core.education.beans.InstituteData">
 			<list>
@@ -260,7 +260,7 @@
 	</bean>
 	
 	<bean id="standardPopulator" class="com.myapp.core.education.populator.StandardPopulator"/>
-	
+	<bean id="standardReversePopulator" class="com.myapp.core.education.populator.StandardReversePopulator"/>
 	<bean id="standardConvert" parent="abstractPopulatingConverter">
 		<property name="targetClass" value="com.myapp.core.education.beans.StandardData">
 			<list>
@@ -276,6 +276,7 @@
 	<bean id="studentFacade" class="com.myapp.core.education.facade.impl.DefaultStudentFacade">
 		<property name="studentService" ref="studentService"/>
 		<property name="studentConverter" ref="studentConverter"/>
+		<property name="standardReversePopulator" ref="standardReversePopulator"/>
 	</bean>
 	
 	<bean id="instituteDao" class="com.myapp.core.education.dao.impl.DefaultInstituteDao"/>
@@ -285,6 +286,7 @@
 	<bean id="instituteFacade" class="com.myapp.core.education.facade.impl.DefaultInstituteFacade">
 		<property name="instituteService" ref="instituteService"/>
 		<property name="instituteConverter" ref="instituteConverter"/>
+		<property name="instituteReversePopulator" ref="instituteReversePopulator"/>
 	</bean>
 	
 	<bean id="standardDao" class="com.myapp.core.education.dao.impl.DefaultStandardDao"/>
@@ -294,5 +296,6 @@
 	<bean id="standardFacade" class="com.myapp.core.education.facade.impl.DefaultStandardFacade">
 		<property name="standardService" ref="standardService"/>
 		<property name="standardConverter" ref="standardConverter"/>
+		<property name="standardReversePopulator" ref="standardReversePopulator"/>
 	</bean>
 </beans>
