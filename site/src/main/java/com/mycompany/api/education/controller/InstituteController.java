@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.myapp.core.education.beans.InstituteData;
 import com.myapp.core.education.facade.InstituteFacade;
+import com.mycompany.api.data.utils.InstituteDataUtil;
 import com.mycompany.api.eductaion.response.InstituteResponse;
 
 @Controller
@@ -39,10 +40,15 @@ public class InstituteController
 	@ResponseBody
 	public InstituteResponse create(InstituteData instituteData)
 	{
-		InstituteResponse reponse= new InstituteResponse();
+		InstituteResponse response= new InstituteResponse();
+		
+		if(InstituteDataUtil.validate(instituteData, response))
+		{
+			return response;
+		}
 		instituteData=instituteFacade.save(instituteData);
-		reponse.setInstituteData(instituteData);
-		return reponse;
+		response.setInstituteData(instituteData);
+		return response;
 	}
 	
 	@RequestMapping(value="/get/{instituteid}", produces="application/json")
@@ -50,6 +56,11 @@ public class InstituteController
 	public InstituteResponse getInstituteById(@PathVariable("instituteid") Long instituteId)
 	{
 		InstituteResponse reponse= new InstituteResponse();
+		if(null == instituteId)
+		{
+			reponse.setErrorMessage("Institute id must be present");
+		}
+		
 		InstituteData instituteData=instituteFacade.getInstitute(instituteId);
 		reponse.setInstituteData(instituteData);
 		return reponse;
