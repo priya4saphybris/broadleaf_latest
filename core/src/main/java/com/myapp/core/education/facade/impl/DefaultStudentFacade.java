@@ -47,10 +47,6 @@ public class DefaultStudentFacade implements StudentFacade
 	@Override
 	public StudentData save(StudentData studentData) 
 	{
-		if(null == studentData)
-		{
-			return studentData;
-		}
 		Student student= new Student();
 		standardReversePopulator.populate(studentData, student);
 		student=studentService.save(student);
