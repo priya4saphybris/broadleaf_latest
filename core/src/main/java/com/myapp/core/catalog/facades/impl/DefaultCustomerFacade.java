@@ -52,23 +52,7 @@ public class DefaultCustomerFacade implements CustomerFacade
 	public List<CustomerData> readAllCustomers() 
 	{
 		List<MyCustomer> customers=myCustomerService.readAllCustomers();
-		return convert(customers);
-	}
-
-	protected List<CustomerData> convert(List<MyCustomer> customers)
-	{
-		List<CustomerData> customersList= new ArrayList<CustomerData>();
-		
-		if(null != customers && !CollectionUtils.isEmpty(customers))
-		{
-			for(MyCustomer customer: customers)
-			{
-				customersList.add(customerConverter.convert(customer));
-			}
-			
-		}
-		return customersList;
-		
+		return customerConverter.convertAll(customers);
 	}
 
 	@Override
