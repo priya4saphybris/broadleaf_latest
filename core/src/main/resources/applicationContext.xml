@@ -51,12 +51,12 @@
 		</property>
 	</bean>
 	
-	<bean id="productListConverter" parent="abstractPopulatingConverter">
+	<!-- <bean id="productListConverter" parent="abstractPopulatingConverter">
 		<property name="targetClass" value="com.myapp.core.catalog.beans.ProductItemData"/>
 		<property name="populators">
 			
 		</property>
-	</bean>
+	</bean> -->
 	
 	<bean id="storeConverter" parent="abstractPopulatingConverter">
 		<property name="targetClass" value="com.myapp.core.beans.StoreData"/>
@@ -230,7 +230,7 @@
 	
 	<bean id="productListDataPopulator" class="com.myapp.core.catalog.populators.ProductListDataPopulator"/>
 	
-	<bean class="productListConverter" parent="abstractPopulatingConverter">
+	<bean id="productListConverter" parent="abstractPopulatingConverter">
 		<property name="targetClass" value="com.myapp.core.catalog.beans.ProductListData"/>
 		<property name="populators">
 			<list>
@@ -241,8 +241,9 @@
 	
 	<bean id="studentPopulator" class="com.myapp.core.education.populator.StudentPopulator"/>
 	
-	<bean id="studentConvert" parent="abstractPopulatingConverter">
-		<property name="targetClass" value="com.myapp.core.education.beans.StudentData">
+	<bean id="studentConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="com.myapp.core.education.beans.StudentData"/>
+		<property name="populators">
 			<list>
 				<ref bean="studentPopulator"/>
 			</list>
@@ -252,7 +253,8 @@
 	<bean id="institutePopulator" class="com.myapp.core.education.populator.InstitutePopulator"/>
 	<bean id="instituteReversePopulator" class="com.myapp.core.education.populator.InstituteReversePopulator"/>
 	<bean id="instituteConvert" parent="abstractPopulatingConverter">
-		<property name="targetClass" value="com.myapp.core.education.beans.InstituteData">
+		<property name="targetClass" value="com.myapp.core.education.beans.InstituteData"/>
+		<property name="populators">
 			<list>
 				<ref bean="institutePopulator"/>
 			</list>
@@ -262,7 +264,8 @@
 	<bean id="standardPopulator" class="com.myapp.core.education.populator.StandardPopulator"/>
 	<bean id="standardReversePopulator" class="com.myapp.core.education.populator.StandardReversePopulator"/>
 	<bean id="standardConvert" parent="abstractPopulatingConverter">
-		<property name="targetClass" value="com.myapp.core.education.beans.StandardData">
+		<property name="targetClass" value="com.myapp.core.education.beans.StandardData"/>
+		<property name="populators">
 			<list>
 				<ref bean="standardPopulator"/>
 			</list>
