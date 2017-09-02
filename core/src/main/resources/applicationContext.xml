@@ -240,7 +240,7 @@
 	</bean>
 	
 	<bean id="studentPopulator" class="com.myapp.core.education.populator.StudentPopulator"/>
-	
+	<bean id="studentReversePopulator" class="com.myapp.core.education.populator.StudentReversePopulator"/>
 	<bean id="studentConverter" parent="abstractPopulatingConverter">
 		<property name="targetClass" value="com.myapp.core.education.beans.StudentData"/>
 		<property name="populators">
@@ -252,7 +252,7 @@
 	
 	<bean id="institutePopulator" class="com.myapp.core.education.populator.InstitutePopulator"/>
 	<bean id="instituteReversePopulator" class="com.myapp.core.education.populator.InstituteReversePopulator"/>
-	<bean id="instituteConvert" parent="abstractPopulatingConverter">
+	<bean id="instituteConverter" parent="abstractPopulatingConverter">
 		<property name="targetClass" value="com.myapp.core.education.beans.InstituteData"/>
 		<property name="populators">
 			<list>
@@ -263,7 +263,7 @@
 	
 	<bean id="standardPopulator" class="com.myapp.core.education.populator.StandardPopulator"/>
 	<bean id="standardReversePopulator" class="com.myapp.core.education.populator.StandardReversePopulator"/>
-	<bean id="standardConvert" parent="abstractPopulatingConverter">
+	<bean id="standardConverter" parent="abstractPopulatingConverter">
 		<property name="targetClass" value="com.myapp.core.education.beans.StandardData"/>
 		<property name="populators">
 			<list>
@@ -279,7 +279,7 @@
 	<bean id="studentFacade" class="com.myapp.core.education.facade.impl.DefaultStudentFacade">
 		<property name="studentService" ref="studentService"/>
 		<property name="studentConverter" ref="studentConverter"/>
-		<property name="standardReversePopulator" ref="standardReversePopulator"/>
+		<property name="studentReversePopulator" ref="studentReversePopulator"/>
 	</bean>
 	
 	<bean id="instituteDao" class="com.myapp.core.education.dao.impl.DefaultInstituteDao"/>
