@@ -52,7 +52,7 @@
 	</bean>
 	
 	<bean id="productListConverter" parent="abstractPopulatingConverter">
-		<property name="com.myapp.core.catalog.beans.ProductItemData"/>
+		<property name="targetClass" value="com.myapp.core.catalog.beans.ProductItemData"/>
 		<property name="populators">
 			
 		</property>
