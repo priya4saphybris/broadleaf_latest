@@ -17,6 +17,7 @@ public class AddressData
 	private String primaryPhone;
 	private String secondaryPhone;
 	private boolean isDefault;
+	private Long customerId;
 	
 	public String getId() {
 		return id;
@@ -108,5 +109,10 @@ public class AddressData
 	public void setDefault(boolean isDefault) {
 		this.isDefault = isDefault;
 	}
-	
+	public Long getCustomerId() {
+		return customerId;
+	}
+	public void setCustomerId(Long customerId) {
+		this.customerId = customerId;
+	}
 }

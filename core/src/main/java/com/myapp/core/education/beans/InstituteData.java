@@ -1,5 +1,7 @@
 package com.myapp.core.education.beans;
 
+import com.myapp.core.beans.AddressData;
+
 public class InstituteData 
 {
 	private Long id;
@@ -9,6 +11,8 @@ public class InstituteData
 	private String contactNumber2;
 	private String timings;
 	private String breakTime;
+	private AddressData addressData;
+	
 	public Long getId() {
 		return id;
 	}
@@ -51,4 +55,11 @@ public class InstituteData
 	public void setBreakTime(String breakTime) {
 		this.breakTime = breakTime;
 	}
+	public AddressData getAddressData() {
+		return addressData;
+	}
+	public void setAddressData(AddressData addressData) {
+		this.addressData = addressData;
+	}
+	
 }

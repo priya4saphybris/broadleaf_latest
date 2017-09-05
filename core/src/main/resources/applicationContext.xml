@@ -218,6 +218,7 @@
 	
 	<bean id="addressFacade" class="com.myapp.core.catalog.facades.impl.DefaultAddressFacade">
 		<property name="addressConverter" ref="addressConverter"/>
+		<property name="addressReversePopulator" ref="addressReversePopulator"/>
 	</bean>
 	
 	<bean id="smsConfigurationDao" class="com.myapp.core.sms.integration.DefaultSmsConfigurationDao"/>
@@ -290,6 +291,8 @@
 		<property name="instituteService" ref="instituteService"/>
 		<property name="instituteConverter" ref="instituteConverter"/>
 		<property name="instituteReversePopulator" ref="instituteReversePopulator"/>
+		<property name="addressReversePopulator" ref="addressReversePopulator"/>
+		<property name="addressConverter" ref="addressConverter"/>
 	</bean>
 	
 	<bean id="standardDao" class="com.myapp.core.education.dao.impl.DefaultStandardDao"/>
@@ -300,5 +303,12 @@
 		<property name="standardService" ref="standardService"/>
 		<property name="standardConverter" ref="standardConverter"/>
 		<property name="standardReversePopulator" ref="standardReversePopulator"/>
+	</bean>
+	
+	<bean id="addressReversePopulator" class="com.myapp.core.education.populator.AddressReversePopulator">
+	</bean>
+	
+	<bean id="checkoutFacade" class="com.myapp.core.checkout.facades.impl.DefaultCheckoutFacade">
+		<property name="addressReversePopulator" ref="addressReversePopulator"/>
 	</bean>
 </beans>

@@ -1,12 +1,6 @@
 package com.myapp.core.catalog.facades.impl;
 
-import java.util.ArrayList;
 import java.util.List;
-
-import org.broadleafcommerce.profile.core.domain.Customer;
-import org.springframework.jdbc.support.CustomSQLExceptionTranslatorRegistrar;
-import org.springframework.util.CollectionUtils;
-
 import com.myapp.core.beans.CurrentLocationData;
 import com.myapp.core.beans.CustomerData;
 import com.myapp.core.catalog.facades.CustomerFacade;

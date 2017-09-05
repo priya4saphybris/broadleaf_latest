@@ -34,7 +34,7 @@ public class DefaultCustomerDao implements MyCustomerDao
 	public MyCustomer saveCustomer(MyCustomer myCustomer) 
 	{
 		MyCustomerImpl customer= (MyCustomerImpl) myCustomer;
-		this.em.persist(customer);
+		this.em.merge(customer);
 		return findCustomerForId(customer.getId());
 	}
 

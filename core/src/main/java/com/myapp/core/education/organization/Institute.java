@@ -3,27 +3,24 @@ package com.myapp.core.education.organization;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.broadleafcommerce.profile.core.domain.Address;
 import org.broadleafcommerce.profile.core.domain.AddressImpl;
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name="INSTITUTE")
-@Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "blStandardElements")
 public class Institute 
 {
 	@Id
-	@GeneratedValue(generator = "Instituteid")
-	@GenericGenerator(name = "Instituteid", strategy = "org.broadleafcommerce.common.persistence.IdOverrideTableGenerator", parameters = {
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	/*@GenericGenerator(name = "Instituteid", strategy = "org.broadleafcommerce.common.persistence.IdOverrideTableGenerator", parameters = {
 			@org.hibernate.annotations.Parameter(name = "segment_value", value = "Institute"),
 			@org.hibernate.annotations.Parameter(name = "entity_name", value = "com.myapp.core.education.organization.Institute") })
-	@Column(name = "INSTITUTE_ID", nullable = false)
+	@Column(name = "INSTITUTE_ID", nullable = false)*/
 	private Long id;
 	
 	@Column(name = "NAME", nullable = false)

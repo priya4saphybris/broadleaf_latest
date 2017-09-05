@@ -11,7 +11,13 @@ public class InstituteReversePopulator implements Populator<InstituteData, Insti
 	@Override
 	public void populate(InstituteData source, Institute target) throws ConvertionException 
 	{
-		
+		target.setId(source.getId());
+		target.setName(source.getName());
+		target.setDescription(source.getDescription());
+		target.setTimings(source.getTimings());
+		target.setBreakTime(source.getBreakTime());
+		target.setContactNumber1(source.getContactNumber1());
+		target.setContactNumber2(source.getContactNumber2());
 	}
 	
 }
