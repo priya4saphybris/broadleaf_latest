@@ -13,6 +13,15 @@ public class ProductPopulator implements Populator<ProductImpl, ProductData>
 	{
 		productData.setId(productModel.getId());
 		productData.setName(productModel.getName());
+		productData.setBrand(productModel.getManufacturer());
+		productData.setCurrency("INR");
+		productData.setUrl(productModel.getGeneratedUrl());
+		productData.setDescription(productModel.getDescription());
+		productData.setPrice(String.valueOf(productModel.getSalePrice()));
+		productData.setPrice_formatted(productModel.getSalePrice().toString()+" INR");
+		productData.setDiscount_price(productModel.getRetailPrice().toString());
+		productData.setDiscount_price_formatted(productModel.getRetailPrice()+" INR");
+		
 	}
 
 }
