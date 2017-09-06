@@ -19,6 +19,7 @@ public class CategoryPopulator implements Populator<Category, CategoryData>
 		{
 			MyCategoryImpl myCategory= (MyCategoryImpl) source;
 			target.setName(myCategory.getName());
+			//target.setImage_url(source.get);
 		}
 		
 	}

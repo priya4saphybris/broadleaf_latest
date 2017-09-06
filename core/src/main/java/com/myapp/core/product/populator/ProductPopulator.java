@@ -3,6 +3,7 @@ package com.myapp.core.product.populator;
 import org.broadleafcommerce.core.catalog.domain.ProductImpl;
 
 import com.myapp.core.beans.ProductData;
+import com.myapp.core.catalog.model.MyProduct;
 import com.myapp.core.convertion.exception.ConvertionException;
 import com.myapp.core.populator.Populator;
 
@@ -21,6 +22,12 @@ public class ProductPopulator implements Populator<ProductImpl, ProductData>
 		productData.setPrice_formatted(productModel.getSalePrice().toString()+" INR");
 		productData.setDiscount_price(productModel.getRetailPrice().toString());
 		productData.setDiscount_price_formatted(productModel.getRetailPrice()+" INR");
+		
+		if(productModel instanceof MyProduct)
+		{
+			MyProduct myProduct= (MyProduct)productModel;
+			myProduct.setCode(myProduct.getCode());
+		}
 		
 	}
 

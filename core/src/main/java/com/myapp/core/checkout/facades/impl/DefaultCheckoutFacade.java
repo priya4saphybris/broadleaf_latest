@@ -32,9 +32,6 @@ public class DefaultCheckoutFacade implements CheckoutFacade
 		this.addressReversePopulator = addressReversePopulator;
 	}
 
-
-
-
 	@Override
 	public void saveShippingAddress(AddressData addressData, Order cart) 
 	{
@@ -45,6 +42,8 @@ public class DefaultCheckoutFacade implements CheckoutFacade
 		if (shippableFulfillmentGroup != null) {
 			shippableFulfillmentGroup.setAddress(address);
 			shippableFulfillmentGroup.setDeliveryInstruction("");
+			shippableFulfillmentGroup.setOrder(cart);
+			fulfillmentGroupService.save(shippableFulfillmentGroup);
 			try 
 			{
 				cart = this.orderService.save(cart, Boolean.valueOf(true));
