@@ -80,7 +80,6 @@ public class DefaultAddressFacade implements AddressFacade
 		Address updatedAddress=saveAddress(addressData);
 		return addressConverter.convert(updatedAddress);
 	}
-
 	
 	private Address saveAddress(AddressData addressData)
 	{
