@@ -232,7 +232,7 @@
 	<bean id="productListDataPopulator" class="com.myapp.core.catalog.populators.ProductListDataPopulator"/>
 	
 	<bean id="productListConverter" parent="abstractPopulatingConverter">
-		<property name="targetClass" value="com.myapp.core.catalog.beans.ProductListData"/>
+		<property name="targetClass" value="com.myapp.core.catalog.beans.ProductItemData"/>
 		<property name="populators">
 			<list>
 				<ref bean="productListDataPopulator"/>
@@ -311,4 +311,16 @@
 	<bean id="checkoutFacade" class="com.myapp.core.checkout.facades.impl.DefaultCheckoutFacade">
 		<property name="addressReversePopulator" ref="addressReversePopulator"/>
 	</bean>
+	
+	<bean id="filtersDataPopulator" class="com.myapp.core.catalog.populators.FiltersDataPopulator"/>
+	
+	<bean id="facetConveter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="com.myapp.core.catalog.beans.FacetValueData"/>
+		<property name="populators">
+			<list>
+				<ref bean="filtersDataPopulator"/>
+			</list>
+		</property>
+	</bean>
+	
 </beans>

@@ -4,15 +4,14 @@ import java.util.List;
 
 public class FacetData 
 {
-	private List<AbstractFacetValueData> filters;
+	private List<FacetValueData> filters;
 
-	public List<AbstractFacetValueData> getFilters() 
-	{
+	public List<FacetValueData> getFilters() {
 		return filters;
 	}
 
-	public void setFilters(List<AbstractFacetValueData> filters) 
-	{
+	public void setFilters(List<FacetValueData> filters) {
 		this.filters = filters;
 	}
+	
 }

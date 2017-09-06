@@ -16,7 +16,7 @@ public class ProductListDataPopulator implements Populator<Product, ProductItemD
 		target.setCategory(source.getCategory().getId());
 		target.setCurrency("INR");
 		target.setDescription(source.getDescription());
-		target.setUrl(target.getUrl());
+		target.setUrl(source.getUrl());
 		if(null != source.getRetailPrice() && null !=source.getRetailPrice().getAmount())
 		{
 			target.setPrice(Double.valueOf(source.getRetailPrice().getAmount().doubleValue()));
