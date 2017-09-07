@@ -13,7 +13,7 @@ public class InstituteDataUtil
 			return true;
 		}
 		
-		if(null != instituteData.getName())
+		if(null == instituteData.getName())
 		{
 			response.setErrorMessage("Institute name must be present");
 			return true;

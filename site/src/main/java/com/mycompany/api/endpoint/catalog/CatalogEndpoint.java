@@ -40,11 +40,16 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.myapp.core.beans.ProductData;
+import com.myapp.core.catalog.beans.FacetData;
+import com.myapp.core.catalog.beans.FacetValueData;
 import com.myapp.core.catalog.beans.MetaData;
 import com.myapp.core.catalog.beans.ProductItemData;
 import com.myapp.core.catalog.beans.ProductListData;
+import com.myapp.core.catalog.facades.ProductFacade;
 import com.myapp.core.converter.Converter;
 
 import java.util.ArrayList;
@@ -71,24 +76,39 @@ public class CatalogEndpoint extends
 	@Resource(name="productListConverter")
 	private Converter<Product, ProductItemData> productListConverter;
 	
+	@Resource(name="facetConveter")
+	private Converter<SearchFacetDTO, FacetValueData> facetConveter;
+	
+	@Resource(name="productFacade")
+	private ProductFacade productFacade;
+	
     @Override
     @RequestMapping(value = "product/{id}", method = RequestMethod.GET)
     public ProductWrapper findProductById(HttpServletRequest request, @PathVariable("id") Long id) {
         return super.findProductById(request, id);
     }
 
+    @RequestMapping(value = "p/{id}", method = RequestMethod.GET, produces= "application/json")
+    public ProductData findProduct(@PathVariable("id") Long id)
+    {
+    	ProductData productData=productFacade.getProductForID(id);
+    	return productData;
+    }
+    
     @RequestMapping(value = "c/{categoryId}", method = RequestMethod.GET)
-    public void getProductsForCategory(HttpServletRequest request,
+    @ResponseBody
+    public ProductListData getProductsForCategory(HttpServletRequest request,
     		@PathVariable("categoryId") Long categoryId,
     		@RequestParam(value = "pageSize", defaultValue = "15") Integer pageSize,
     		@RequestParam(value = "page", defaultValue = "1") Integer page)
     {
-    	findSearchResultsByCategory(request,categoryId,pageSize,page);
+    	return findSearchResultsByCategory(request,categoryId,pageSize,page);
     }
     
     @SuppressWarnings("deprecation")
-	private void findSearchResultsByCategory(HttpServletRequest request,Long categoryId,Integer pageSize,Integer page)
+	private ProductListData findSearchResultsByCategory(HttpServletRequest request,Long categoryId,Integer pageSize,Integer page)
     {
+    	ProductListData productListData= new ProductListData();
     	SearchCriteria searchCriteria = facetService.buildSearchCriteria(request);
     	searchCriteria.setPageSize(pageSize);
 		searchCriteria.setPage(page);
@@ -110,7 +130,6 @@ public class CatalogEndpoint extends
 			List<SearchFacetDTO> facets= result.getFacets();
 			List<Product> products= result.getProducts();
 			
-			ProductListData productListData= new ProductListData();
 			List<ProductItemData> productsdata= new ArrayList<ProductItemData>();
 			
 			for(Product product: products)
@@ -127,19 +146,24 @@ public class CatalogEndpoint extends
 			
 			List<SearchFacetDTO> facetResults=result.getFacets();
 			
-			for(SearchFacetDTO facet: facetResults)
-			{
-				
-			}
+			List<FacetValueData> facetList= new ArrayList<FacetValueData>();
+			facetList.addAll(facetConveter.convertAll(facetResults));
+			
+			FacetData facetData= new FacetData();
+			facetData.setFilters(facetList);
 			
 			MetaData metaData= new MetaData();
 			metaData.setRecordsCount(recordsCount);
+			metaData.setFilters(facetData);
+			productListData.setMetaData(metaData);
 		}
 		catch (ServiceException e) 
 		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		return productListData;
     }
     
     @Override

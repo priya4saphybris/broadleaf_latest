@@ -26,7 +26,12 @@
         in web.xml. -->
     
     <!-- For specific controller configuration for the REST APIs, see applicationContext-servlet-rest-api.xml -->
-    
+    <!-- <sec:authentication-manager>
+    	<sec:authentication-provider>
+    		<sec:user-service id="">
+    		</sec:user-service>
+    	</sec:authentication-provider>
+    </sec:authentication-manager> -->
 
     <!-- Set up Spring security for the RESTful API -->
     <sec:http pattern="/api/**" create-session="stateless">

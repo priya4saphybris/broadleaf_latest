@@ -13,8 +13,6 @@ import org.broadleafcommerce.core.order.domain.Order;
 import org.broadleafcommerce.core.order.service.OrderService;
 import org.broadleafcommerce.core.pricing.service.exception.PricingException;
 import org.broadleafcommerce.core.web.order.CartState;
-import org.broadleafcommerce.profile.core.domain.Customer;
-import org.broadleafcommerce.profile.core.domain.CustomerImpl;
 import org.broadleafcommerce.profile.core.service.CustomerService;
 import org.broadleafcommerce.profile.web.core.service.login.LoginService;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -25,11 +23,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.myapp.core.beans.CustomerData;
 import com.myapp.core.beans.RestMessageData;
 import com.myapp.core.catalog.facades.CustomerFacade;
+import com.myapp.core.catalog.service.MyCustomerService;
 import com.myapp.core.forms.MyCustomerForm;
+import com.myapp.core.user.MyCustomerImpl;
 
 @Controller
 @RequestMapping("/**/customer")
@@ -52,10 +51,13 @@ public class MyCustomerController
 	@Resource(name = "blUserDetailsService")
 	private UserDetailsService userDetailsService;
 	
+	@Resource(name = "myCustomerService")
+	private MyCustomerService myCustomerService;
+	
 	@RequestMapping(value="/create", method= RequestMethod.POST)
 	@ResponseBody
 	public RestMessageData createCustomer(HttpServletRequest request, HttpServletResponse response,
-			MyCustomerForm customerForm) throws PricingException, JsonParseException, JsonMappingException, IOException
+			MyCustomerForm customerForm) throws PricingException, JsonParseException, IOException
 	{
 		MyCustomerForm myCustomerForm= new MyCustomerForm();
 		myCustomerForm.setFirstName(customerForm.getFirstName());
@@ -73,6 +75,7 @@ public class MyCustomerController
 		}
 		catch(Exception ex)
 		{
+			LOG.error(ex);
 			rmd.setIsSuccess(false);
 		}
 		
@@ -88,13 +91,13 @@ public class MyCustomerController
 	
 	private void register(MyCustomerForm myCustomerForm, RestMessageData rmd) throws PricingException
 	{
-		Customer customer = new CustomerImpl();
+		MyCustomerImpl customer = new MyCustomerImpl();
 		customer.setUsername(myCustomerForm.getEmailAddress());
 		customer.setFirstName(myCustomerForm.getFirstName());
 		customer.setLastName(myCustomerForm.getLastName());
 		customer.setUsername(myCustomerForm.getEmailAddress());
-		
-		Customer newCustomer = null;
+		customer.setAccessToken("dodksadpadpask");
+		MyCustomerImpl newCustomer = null;
 		
 		try
 		{
@@ -104,7 +107,7 @@ public class MyCustomerController
 		}
 		catch(UsernameNotFoundException unf)
 		{
-			newCustomer =this.customerService.registerCustomer(customer,
+			newCustomer =(MyCustomerImpl) this.customerService.registerCustomer(customer,
 					myCustomerForm.getPassword(), myCustomerForm.getPasswordConfirm());
 			this.loginService.loginCustomer(customer);
 			

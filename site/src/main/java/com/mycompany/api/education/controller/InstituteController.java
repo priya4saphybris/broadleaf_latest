@@ -7,13 +7,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.myapp.core.beans.AddressData;
 import com.myapp.core.education.beans.InstituteData;
 import com.myapp.core.education.facade.InstituteFacade;
 import com.mycompany.api.data.utils.InstituteDataUtil;
 import com.mycompany.api.eductaion.response.InstituteResponse;
 
 @Controller
-@RequestMapping("/institute")
+@RequestMapping("/**/institute")
 public class InstituteController 
 {
 	@Resource(name="instituteFacade")
@@ -62,6 +63,16 @@ public class InstituteController
 		}
 		
 		InstituteData instituteData=instituteFacade.getInstitute(instituteId);
+		reponse.setInstituteData(instituteData);
+		return reponse;
+	}
+	
+	@RequestMapping(value="/address/create/{instituteid}", method=RequestMethod.POST,produces="application/json")
+	@ResponseBody
+	public InstituteResponse createInstituteAddress(@PathVariable("instituteid")Long instituteId,AddressData addressData)
+	{
+		InstituteResponse reponse= new InstituteResponse();
+		InstituteData instituteData=instituteFacade.createAddress(addressData, instituteId);
 		reponse.setInstituteData(instituteData);
 		return reponse;
 	}

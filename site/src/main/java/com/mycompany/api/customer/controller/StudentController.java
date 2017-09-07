@@ -1,43 +1,56 @@
 package com.mycompany.api.customer.controller;
 
-import java.util.List;
+import javax.annotation.Resource;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
+import org.springframework.web.bind.annotation.ResponseBody;
 import com.myapp.core.education.beans.StudentData;
 import com.myapp.core.education.facade.StudentFacade;
+import com.mycompany.api.data.utils.StudentDataUtil;
+import com.mycompany.api.eductaion.response.StudentResponse;
 
 @Controller
-@RequestMapping(value="/students")
+@RequestMapping(value="/student")
 public class StudentController 
 {
+	@Resource(name="studentFacade")
 	private StudentFacade studentFacade;
 	
-	@RequestMapping(value="/students", produces="application/json")
-	public List<StudentData> getStudents()
+	@RequestMapping(value="/list", produces="application/json")
+	public StudentResponse getStudents()
 	{
-		return studentFacade.getStudents();
+		StudentResponse response= new StudentResponse();
+		response.setStudents(studentFacade.getStudents());
+		return response;
 	}
-	@RequestMapping(value="/students/{customerid}", produces="application/json")
-	public List<StudentData> getStudentsForCustomer(@PathVariable("customerid") Long customerid)
+	@RequestMapping(value="/list/{customerid}", produces="application/json")
+	public StudentResponse getStudentsForCustomer(@PathVariable("customerid") Long customerid)
 	{
+		StudentResponse response= new StudentResponse();
 		if(null != customerid)
 		{
-			return studentFacade.getStudentsForCustomer(customerid);
+			response.setStudents(studentFacade.getStudentsForCustomer(customerid));
+			return response;
 		}
-		return null;
+		
+		response.setErrorMessage("Customer id shoud not be null");
+		return response;
 	}
 	
-	@RequestMapping(value="/students/{customerid}", method=RequestMethod.POST, produces="application/json")
-	public StudentData createStudent(StudentData studentData)
+	@RequestMapping(value="/create", method=RequestMethod.POST, produces="application/json")
+	@ResponseBody
+	public StudentResponse createStudent(StudentData studentData)
 	{
-		if(null != studentData)
+		StudentResponse response= new StudentResponse();
+		if(StudentDataUtil.validate(studentData, response))
 		{
-			StudentData newStudent=studentFacade.save(studentData);
-			return newStudent;
+			response.setStudentData(studentData);
+			return response;
 		}
-		return studentData;
+		StudentData newStudent=studentFacade.save(studentData);
+		response.setStudentData(newStudent);
+		return response;
 	}
 }

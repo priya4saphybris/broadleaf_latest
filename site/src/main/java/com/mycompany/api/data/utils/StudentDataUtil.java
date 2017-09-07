@@ -1,38 +1,43 @@
 package com.mycompany.api.data.utils;
 
 import com.myapp.core.education.beans.StudentData;
+import com.mycompany.api.eductaion.response.StudentResponse;
 
 public class StudentDataUtil 
 {
-	public static boolean validate(StudentData studentData)
+	public static boolean validate(StudentData studentData, StudentResponse response)
 	{
-		boolean invalid= false;
 		
 		if(null == studentData)
 		{
-			return (invalid=true);
+			response.setErrorMessage("No data present in student object");
+			return true;
 		}
 		
 		if(null == studentData.getFirstName() || null == studentData.getLastName())
 		{
-			return (invalid=true);
+			response.setErrorMessage("First name or Last name should not be null");
+			return true;
 		}
 		
 		if(null == studentData.getStandard())
 		{
-			return (invalid=true);
+			response.setErrorMessage("Standard should not be null");
+			return true;
 		}
 		
 		if(null == studentData.getCustomerData())
 		{
-			return (invalid=true);
+			response.setErrorMessage("Customer should not be null");
+			return true;
 		}
 		
 		if(null == studentData.getRollNumber())
 		{
-			return (invalid=true);
+			response.setErrorMessage("Roll number should not be null");
+			return true;
 		}
 		
-		return invalid;
+		return false;
 	}
 }
