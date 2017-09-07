@@ -791,4 +791,4 @@ INSERT INTO SMS_CONFIGURATION(CONFIGURATION_ID,USER_NAME,PASSWORD,URL,SENDER) VA
 
 
 INSERT INTO BLC_STATIC_ASSET (STATIC_ASSET_ID, MIME_TYPE, STORAGE_TYPE, FULL_URL, NAME) VALUES (101,'image/jpg','FILESYSTEM','http://res.cloudinary.com/commercemedia/image/upload/v1504762547/ice-cream-banner_z2uqgw_pgfiqu.jpg','504');
-INSERT INTO BLC_STATIC_ASSET (STATIC_ASSET_ID, MIME_TYPE, STORAGE_TYPE, FULL_URL, NAME) VALUES (101,'image/jpg','FILESYSTEM','http://res.cloudinary.com/commercemedia/image/upload/v1504762538/food-banner-2_c590cq_vvim6v.jpg','501');
+INSERT INTO BLC_STATIC_ASSET (STATIC_ASSET_ID, MIME_TYPE, STORAGE_TYPE, FULL_URL, NAME) VALUES (102,'image/jpg','FILESYSTEM','http://res.cloudinary.com/commercemedia/image/upload/v1504762538/food-banner-2_c590cq_vvim6v.jpg','501');

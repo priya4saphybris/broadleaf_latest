@@ -16,13 +16,11 @@ public class DefaultStaticAssetFacade implements StaticAssetFacade
 	@Resource(name="blStaticAssetService")
 	private StaticAssetService staticAssetService;
 	
-	Converter<StaticAsset, BannersData> assetConverter;
-	
+	private Converter<StaticAsset, BannersData> assetConverter;
 	
 	public Converter<StaticAsset, BannersData> getAssetConverter() {
 		return assetConverter;
 	}
-
 
 	public void setAssetConverter(Converter<StaticAsset, BannersData> assetConverter) {
 		this.assetConverter = assetConverter;
