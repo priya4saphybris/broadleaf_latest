@@ -323,4 +323,18 @@
 		</property>
 	</bean>
 	
+	<bean id="assetPopulator" class="com.myapp.core.populators.AssetPopulator"/>
+	
+	<bean id="assetConveter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="com.myapp.core.catalog.beans.BannersData"/>
+		<property name="populators">
+			<list>
+				<ref bean="assetPopulator"/>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="staticAssetFacade" class="com.myapp.core.catalog.facades.impl.DefaultStaticAssetFacade">
+		<property name="assetConverter" ref="assetConverter"/>
+	</bean>
 </beans>
