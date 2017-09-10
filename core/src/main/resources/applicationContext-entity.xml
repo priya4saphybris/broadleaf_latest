@@ -47,4 +47,5 @@
         <bean id="com.myapp.core.catalog.model.SizeDetailsImpl" class="com.myapp.core.catalog.model.SizeDetailsImpl" scope="prototye"/>
         <bean id="com.myapp.core.catalog.tailor.store.TailorCustomerXref" class="com.myapp.core.catalog.tailor.store.TailorCustomerXref" scope="prototye"/>
         <bean id="com.myapp.core.catalog.tailor.store.TailorFabricXref" class="com.myapp.core.catalog.tailor.store.TailorFabricXref" scope="prototye"/>
+        <bean id="com.myapp.core.catalog.model.CustomerArea" class="com.myapp.core.catalog.model.CustomerArea" scope="prototye"/>
 </beans>

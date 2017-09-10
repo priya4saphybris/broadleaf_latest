@@ -32,6 +32,7 @@
         <class>com.myapp.core.catalog.tailor.store.TailorCustomerXref</class>
         <class>com.myapp.core.catalog.tailor.store.TailorFabricXref</class>
         <class>com.myapp.core.catalog.model.SizeDetailsImpl</class>
+        <class>com.myapp.core.catalog.model.CustomerArea</class>
         <exclude-unlisted-classes/>
     </persistence-unit>
     
