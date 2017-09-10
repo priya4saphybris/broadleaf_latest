@@ -1,6 +1,19 @@
 package com.myapp.core.catalog.facades.impl;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import javax.annotation.Resource;
+
+import org.broadleafcommerce.profile.core.domain.Address;
+import org.broadleafcommerce.profile.core.domain.Customer;
+import org.broadleafcommerce.profile.core.domain.CustomerAddress;
+import org.broadleafcommerce.profile.core.service.CustomerAddressService;
+import org.broadleafcommerce.profile.core.service.CustomerService;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.util.CollectionUtils;
+
+import com.myapp.core.beans.AddressData;
 import com.myapp.core.beans.CurrentLocationData;
 import com.myapp.core.beans.CustomerData;
 import com.myapp.core.catalog.facades.CustomerFacade;
@@ -12,12 +25,31 @@ import com.myapp.core.user.MyCustomer;
 
 public class DefaultCustomerFacade implements CustomerFacade
 {
+	@Resource(name = "blCustomerService")
+	protected CustomerService customerService;
+	
+	@Resource(name = "blUserDetailsService")
+	private UserDetailsService userDetailsService;
+	
+	@Resource(name="blCustomerAddressService")
+	private CustomerAddressService customerAddressService;
+	
 	private MyCustomerService myCustomerService;
 	
 	private Converter<MyCustomer, CustomerData> customerConverter;
 	
 	private MyLocationService locationService;
 	
+	private Converter<Address, AddressData> addressConverter;
+	
+	public Converter<Address, AddressData> getAddressConverter() {
+		return addressConverter;
+	}
+
+	public void setAddressConverter(Converter<Address, AddressData> addressConverter) {
+		this.addressConverter = addressConverter;
+	}
+
 	public MyLocationService getLocationService() {
 		return locationService;
 	}
@@ -62,4 +94,15 @@ public class DefaultCustomerFacade implements CustomerFacade
 		}
 		return null;
 	}
+
+	@Override
+	public CustomerData getCurrentCustomer(Customer customer) 
+	{
+		if(null == customer)
+		{
+			return null;
+		}
+		return customerConverter.convert((MyCustomer)customer);
+	}
+
 }

@@ -1,7 +1,6 @@
 package com.myapp.core.catalog.facades.impl;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -95,20 +94,88 @@ public class DefaultAddressFacade implements AddressFacade
 	}
 
 	@Override
+	public AddressData update(AddressData addressData) 
+	{
+		CustomerAddress customerAddress=getCustomerAddress(addressData.getCustomerId(), Long.valueOf(addressData.getId()));
+		CustomerAddress address=customerAddressService.saveCustomerAddress(customerAddress);
+		return addressConverter.convert(address.getAddress());
+	}
+	
+	@Override
 	public List<AddressData> getCustomerAddresses(Long customerid) 
 	{
-		List<CustomerAddress> customerAddresses=this.customerAddressService.readActiveCustomerAddressesByCustomerId(customerid);
+		List<CustomerAddress> addressList=customerAddressService.readActiveCustomerAddressesByCustomerId(customerid);
 		
-		if(CollectionUtils.isEmpty(customerAddresses))
+		List<AddressData> adresses= new ArrayList<AddressData>();
+		
+		if(!CollectionUtils.isEmpty(addressList))
 		{
-			return Collections.emptyList();
+			for(CustomerAddress customerAddress: addressList)
+			{
+				Address address= customerAddress.getAddress();
+				
+				if(null != address)
+				{
+					adresses.add(addressConverter.convert(address));
+				}
+			}
 		}
-		List<AddressData> addressList= new ArrayList<AddressData>();
-		for(CustomerAddress address: customerAddresses)
-		{
-			AddressData addressData= addressConverter.convert(address.getAddress());
-			addressList.add(addressData);
-		}
-		return addressList;
+		return adresses;
 	}
+	
+	@Override
+	public AddressData getCutomerDefaultAddress(Long customerid)
+	{
+		CustomerAddress customerAddress=customerAddressService.findDefaultCustomerAddress(customerid);
+		
+		if(null!=customerAddress)
+		{
+			return addressConverter.convert(customerAddress.getAddress());
+		}
+		return null;
+	}
+
+	@Override
+	public List<AddressData> getDeleteAddresses(Long customerId, Long addressId) 
+	{
+		
+		CustomerAddress customerAddress=getCustomerAddress(customerId,addressId);
+		
+		if(null != customerAddress)
+		{
+			customerAddressService.deleteCustomerAddressById(customerAddress.getId());
+		}
+		
+		return getCustomerAddresses(customerId);
+	}
+	
+	@Override
+	public List<AddressData> makeDefaultAddress(Long customerId, Long addressId)
+	{
+		CustomerAddress customerAddress=getCustomerAddress(customerId,addressId);
+		
+		if(null != customerAddress)
+		{
+			customerAddressService.makeCustomerAddressDefault(customerId, customerAddress.getId());
+		}
+		return getCustomerAddresses(customerId);
+	}
+	
+	private CustomerAddress getCustomerAddress(Long customerId, Long addressid)
+	{
+		List<CustomerAddress> addressList=customerAddressService.readActiveCustomerAddressesByCustomerId(customerId);
+		if(!CollectionUtils.isEmpty(addressList))
+		{
+			for(CustomerAddress customerAddress: addressList)
+			{
+				Address address= customerAddress.getAddress();
+				if(address.getId()==addressid)
+				{
+					return customerAddress;
+				}
+			}
+		}
+		return null;
+	}
+
 }
