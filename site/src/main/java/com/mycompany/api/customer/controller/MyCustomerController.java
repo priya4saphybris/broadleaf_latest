@@ -14,21 +14,26 @@ import org.broadleafcommerce.core.order.service.OrderService;
 import org.broadleafcommerce.core.pricing.service.exception.PricingException;
 import org.broadleafcommerce.core.web.order.CartState;
 import org.broadleafcommerce.profile.core.service.CustomerService;
+import org.broadleafcommerce.profile.web.core.CustomerState;
 import org.broadleafcommerce.profile.web.core.service.login.LoginService;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fasterxml.jackson.core.JsonParseException;
+import com.myapp.core.beans.AddressData;
 import com.myapp.core.beans.CustomerData;
 import com.myapp.core.beans.RestMessageData;
 import com.myapp.core.catalog.facades.CustomerFacade;
 import com.myapp.core.catalog.service.MyCustomerService;
 import com.myapp.core.forms.MyCustomerForm;
 import com.myapp.core.user.MyCustomerImpl;
+import com.mycompany.api.customer.response.AddressResponse;
+import com.mycompany.api.customer.response.CustomerResponse;
 
 @Controller
 @RequestMapping("/**/customer")
@@ -122,6 +127,20 @@ public class MyCustomerController
 			rmd.setIsSuccess(true);
 		}
 		
+	}
+	
+	@RequestMapping(value="/profile", method= RequestMethod.GET, produces="application/json")
+	public CustomerResponse myprofile(HttpServletRequest request)
+	{
+		CustomerResponse customerResponse= new CustomerResponse();
 		
+		if(null ==CustomerState.getCustomer())
+		{
+			return customerResponse;
+		}
+		
+		CustomerData customerData= customerFacade.getCurrentCustomer(CustomerState.getCustomer());
+		customerResponse.setCustomerData(customerData);
+		return customerResponse;
 	}
 }
